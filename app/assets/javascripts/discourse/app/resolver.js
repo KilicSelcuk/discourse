@@ -231,7 +231,7 @@ export function buildResolver(baseName) {
         }
       }
 
-      if (original !== normalized && !normalized.includes(":admin")) {
+      if (original !== normalized) {
         deprecated(
           `Looking up '${normalized}' is no longer permitted. Rename to '${original}' instead`,
           { id: "discourse.deprecated-resolver-normalization" }
