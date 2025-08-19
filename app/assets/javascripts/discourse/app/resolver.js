@@ -231,7 +231,7 @@ export function buildResolver(baseName) {
         }
       }
 
-      if (original !== normalized) {
+      if (original !== normalized && !normalized.includes(":admin")) {
         deprecated(
           `Looking up '${normalized}' is no longer permitted. Rename to '${original}' instead`,
           { id: "discourse.deprecated-resolver-normalization" }
@@ -321,26 +321,37 @@ export function buildResolver(baseName) {
         underscored = decamelize(withoutType).replace(/-/g, "_"),
         segments = withoutType.split("/");
 
-      return (
+      // Default unmodified behavior of original resolveTemplate.
+      const original = prefix + withoutType;
+
+      const candidates = [
         // Convert dots and dashes to slashes
-        this.discourseTemplateModule(
-          prefix + withoutType.replace(/[\.-]/g, "/")
-        ) ||
-        // Default unmodified behavior of original resolveTemplate.
-        this.discourseTemplateModule(prefix + withoutType) ||
-        // Underscored without namespace
-        this.discourseTemplateModule(prefix + underscored) ||
+        prefix + withoutType.replace(/[\.-]/g, "/"),
+        original ||
+          // Underscored without namespace
+          prefix + underscored,
         // Underscored with first segment as directory
-        this.discourseTemplateModule(prefix + underscored.replace("_", "/")) ||
+        prefix + underscored.replace("_", "/"),
         // Underscore only the last segment
-        this.discourseTemplateModule(
-          `${prefix}${segments.slice(0, -1).join("/")}/${segments[
-            segments.length - 1
-          ].replace(/-/g, "_")}`
-        ) ||
+        `${prefix}${segments.slice(0, -1).join("/")}/${segments[
+          segments.length - 1
+        ].replace(/-/g, "_")}`,
         // All dasherized
-        this.discourseTemplateModule(prefix + withoutType.replace(/\//g, "-"))
-      );
+        prefix + withoutType.replace(/\//g, "-"),
+      ];
+
+      for (const candidate of candidates) {
+        let result;
+        if ((result = this.discourseTemplateModule(candidate))) {
+          if (candidate !== original && !candidate.includes("admin")) {
+            deprecated(
+              `Looking up 'template:${candidate}' is no longer permitted. Rename to 'template:${original}' instead`,
+              { id: "discourse.deprecated-resolver-normalization" }
+            );
+          }
+          return result;
+        }
+      }
     }
 
     // Try to find a template within a special admin namespace, e.g. adminEmail => admin/templates/email
