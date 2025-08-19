@@ -376,17 +376,26 @@ export function buildResolver(baseName) {
         namespaced = `${match[1].toLowerCase()}${match[2]}`;
       }
 
-      let resolved;
-
       if (namespaced) {
         let adminParsedName = this.parseName(`template:${namespaced}`);
-        resolved =
-          this.findTemplate(adminParsedName, "admin/templates/") ||
-          this.findTemplate(parsedName, "admin/templates/") ||
-          this.findTemplate(adminParsedName, "admin/"); // Nested under discourse/templates/admin (e.g. from plugin)
+        const candidates = [
+          [adminParsedName, "admin/templates/"],
+          [parsedName, "admin/templates/"],
+          [adminParsedName, "admin/"],
+        ];
+        for (const [candidate, prefix] of candidates) {
+          let result;
+          if ((result = this.findTemplate(candidate, prefix))) {
+            if (candidate !== parsedName) {
+              deprecated(
+                `Looking up '${candidate.fullName}' is no longer permitted. Rename to '${parsedName.fullName}' instead`,
+                { id: "discourse.deprecated-resolver-normalization" }
+              );
+            }
+            return result;
+          }
+        }
       }
-
-      return resolved;
     }
   };
 }
