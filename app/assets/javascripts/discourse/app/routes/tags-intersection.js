@@ -1,4 +1,4 @@
-import { buildTagRoute } from "discourse/routes/tag-show";
+import { buildTagRoute } from "discourse/routes/tag/show";
 
 // The tags-intersection route is exactly the same as the tags-show route, but the wildcard at the
 // end of the route (*additional_tags) will cause a match when query parameters are present,

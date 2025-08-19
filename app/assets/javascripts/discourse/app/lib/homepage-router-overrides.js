@@ -24,7 +24,7 @@ export default function applyRouterHomepageOverrides(router) {
 export const homepageRewriteParam = "_discourse_homepage_rewrite";
 
 /**
- * Returns a magic URL which `discovery-index` will redirect to.
+ * Returns a magic URL which `discovery/index` will redirect to.
  * We watch for this, and then perform the rewrite in the router.
  */
 export function homepageDestination() {

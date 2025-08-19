@@ -4,7 +4,7 @@ import {
   homepageRewriteParam,
 } from "discourse/lib/homepage-router-overrides";
 import { disableImplicitInjections } from "discourse/lib/implicit-injections";
-import DiscourseRoute from "./discourse";
+import DiscourseRoute from "../discourse";
 
 @disableImplicitInjections
 export default class DiscoveryIndex extends DiscourseRoute {

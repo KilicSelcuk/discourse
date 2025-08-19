@@ -1,7 +1,7 @@
 import { setupTest } from "ember-qunit";
 import { module, test } from "qunit";
 
-module("Unit | Route | review-index", function (hooks) {
+module("Unit | Route | review/index", function (hooks) {
   setupTest(hooks);
 
   test("subscribes and unsubscribes /reviewable_counts(with id) when user menu enabled", function (assert) {
@@ -12,7 +12,7 @@ module("Unit | Route | review-index", function (hooks) {
       instantiate: false,
     });
 
-    const reviewIndexRoute = this.owner.lookup("route:review-index");
+    const reviewIndexRoute = this.owner.lookup("route:review/index");
     const messageBus = this.owner.lookup("service:message-bus");
 
     let channels = messageBus.callbacks.map((c) => c.channel);

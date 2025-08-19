@@ -1,5 +1,5 @@
 import RouteTemplate from "ember-route-template";
-import UpcomingEventsCalendar from "../components/upcoming-events-calendar";
+import UpcomingEventsCalendar from "../../components/upcoming-events-calendar";
 
 export default RouteTemplate(
   <template>
