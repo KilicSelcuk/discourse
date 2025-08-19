@@ -12,6 +12,6 @@ export default RouteTemplate(
         <p>{{htmlSafe (i18n "admin.dashboard.new_features.subtitle")}}</p>
         <DashboardNewFeatures />
       </div>
-    </ConditionalLoadingSpinner>
+  </ConditionalLoadingSpinner>
   </template>
 );

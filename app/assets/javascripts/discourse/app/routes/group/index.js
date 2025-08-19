@@ -42,7 +42,7 @@ export default class GroupIndex extends DiscourseRoute {
 
   @action
   didTransition() {
-    this.controllerFor("group-index").set("filterInput", this._params.filter);
+    this.controllerFor("group.index").set("filterInput", this._params.filter);
     return true;
   }
 }

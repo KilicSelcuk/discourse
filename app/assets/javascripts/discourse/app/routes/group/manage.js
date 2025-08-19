@@ -24,7 +24,7 @@ export default class GroupManage extends DiscourseRoute {
   }
 
   setupController(controller, model) {
-    this.controllerFor("group-manage").setProperties({ model });
+    this.controllerFor("group.manage").setProperties({ model });
     this.controllerFor("group").set("showing", "manage");
   }
 }

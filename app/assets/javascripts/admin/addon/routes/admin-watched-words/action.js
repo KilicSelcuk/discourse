@@ -4,7 +4,7 @@ import { i18n } from "discourse-i18n";
 
 export default class AdminWatchedWordsActionRoute extends DiscourseRoute {
   model(params) {
-    const controller = this.controllerFor("adminWatchedWordsAction");
+    const controller = this.controllerFor("admin-watched-words/action");
     controller.set("actionNameKey", params.action_id);
     return EmberObject.create({
       nameKey: params.action_id,

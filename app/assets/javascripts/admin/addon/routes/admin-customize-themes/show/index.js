@@ -14,7 +14,7 @@ export default class AdminCustomizeThemesShowIndexRoute extends DiscourseRoute {
   setupController(controller, model) {
     super.setupController(...arguments);
 
-    const parentController = this.controllerFor("adminCustomizeThemes");
+    const parentController = this.controllerFor("admin-customize-themes");
 
     controller.setProperties({
       model,

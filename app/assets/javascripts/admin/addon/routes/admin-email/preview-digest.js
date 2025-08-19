@@ -7,7 +7,7 @@ export default class AdminEmailPreviewDigestRoute extends DiscourseRoute {
   }
 
   afterModel(model) {
-    const controller = this.controllerFor("adminEmailPreviewDigest");
+    const controller = this.controllerFor("admin-email/preview-digest");
     controller.setProperties({
       model,
       username: this.currentUser.get("username"),
