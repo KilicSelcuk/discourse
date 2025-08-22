@@ -67,6 +67,7 @@ module Migrations::Importer
     def execute
       super
       with_progressbar(total_count) { copy_data }
+      after_copy_data
       nil
     end
 
@@ -134,6 +135,9 @@ module Migrations::Importer
       end
 
       nil
+    end
+
+    def after_copy_data
     end
 
     def transform_row(row)
