@@ -7,9 +7,8 @@ import { ajax } from "discourse/lib/ajax";
 import discourseDebounce from "discourse/lib/debounce";
 import { autoUpdatingRelativeAge } from "discourse/lib/formatter";
 import { ADMIN_PANEL, MAIN_PANEL } from "discourse/lib/sidebar/panels";
-import { defaultHomepage } from "discourse/lib/utilities";
 import { i18n } from "discourse-i18n";
-import AiBotSidebarEmptyState from "../components/ai-bot-sidebar-empty-state";
+import AiBotSidebarEmptyState from "../../discourse/components/ai-bot-sidebar-empty-state";
 
 export const AI_CONVERSATIONS_PANEL = "ai-conversations";
 const SCROLL_BUFFER = 100;
@@ -19,8 +18,6 @@ export default class AiConversationsSidebarManager extends Service {
   @service appEvents;
   @service sidebarState;
   @service messageBus;
-  @service routeHistory;
-  @service router;
 
   @tracked topics = [];
   @tracked sections = new TrackedArray();
@@ -102,6 +99,12 @@ export default class AiConversationsSidebarManager extends Service {
 
     this.sidebarState.isForcingSidebar = true;
 
+    // bunu eklersen sidebar ana sidebar olur chat sayfasinda.
+    // kuaza
+    return true;
+
+
+
     // calling this before fetching data
     // helps avoid flash of main sidebar mode
     this.sidebarState.setPanel(AI_CONVERSATIONS_PANEL);
@@ -162,14 +165,6 @@ export default class AiConversationsSidebarManager extends Service {
     }
 
     this._removeScrollListener();
-  }
-
-  get lastKnownAppURL() {
-    const lastForumUrl = this.routeHistory.history.find((url) => {
-      return !url.startsWith("/discourse-ai");
-    });
-
-    return lastForumUrl || this.router.urlFor(`discovery.${defaultHomepage()}`);
   }
 
   async fetchMessages() {
