@@ -25,7 +25,7 @@ class SessionController < ApplicationController
   def sso
     raise Discourse::NotFound unless SiteSetting.enable_discourse_connect?
 
-    destination_url = cookies[:destination_url] || session[:destination_url]
+    destination_url = cookies[:destination_url] || server_session[:destination_url]
     return_path = params[:return_path] || path("/")
 
     if destination_url && return_path == path("/")
@@ -33,7 +33,7 @@ class SessionController < ApplicationController
       return_path = "#{uri.path}#{uri.query ? "?#{uri.query}" : ""}"
     end
 
-    session.delete(:destination_url)
+    server_session[:destination_url] = nil
     cookies.delete(:destination_url)
 
     sso = DiscourseConnect.generate_sso(return_path, secure_session:)
@@ -73,14 +73,16 @@ class SessionController < ApplicationController
       end
 
       if request.xhr?
-        cookies[:destination_url] = data[:sso_redirect_url]
+        # This is needed for DiscourseConnect provider to redirect users correctly
+        cookies[:sso_destination_url] = data[:sso_redirect_url]
         render json: success_json.merge(redirect_url: data[:sso_redirect_url])
       else
         redirect_to data[:sso_redirect_url], allow_other_host: true
       end
     elsif result.no_second_factors_enabled?
       if request.xhr?
-        cookies[:destination_url] = result.data[:sso_redirect_url]
+        # This is needed for DiscourseConnect provider to redirect users correctly
+        cookies[:sso_destination_url] = result.data[:sso_redirect_url]
       else
         redirect_to result.data[:sso_redirect_url], allow_other_host: true
       end
