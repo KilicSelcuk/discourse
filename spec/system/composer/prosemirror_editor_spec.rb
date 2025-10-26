@@ -330,6 +330,32 @@ describe "Composer - ProseMirror editor", type: :system do
       expect(rich).to have_no_css("aside.quote")
       expect(rich).to have_content("This [quote] should not trigger")
     end
+
+    it "avoids applying input rules in inline code if part of the matched text" do
+      open_composer
+      composer.type_content("This `__code` should not__ be bold. `and this, ")
+      page.send_keys([SystemHelpers::PLATFORM_KEY_MODIFIER, "e"])
+      # should not trigger the conversion of "and this, " to code as the 2nd ` is typed inside inline code
+      composer.type_content("not code`")
+
+      expect(rich).to have_no_css("strong")
+      expect(rich).to have_css("code", text: "__code")
+
+      expect(rich).to have_css("code", text: "not code")
+      expect(rich).to have_no_css("code", text: "and this, not code")
+    end
+
+    it "doesn't apply input rules immediately after a single backtick" do
+      open_composer
+      composer.type_content("`**not bold**\n`:tada:")
+
+      expect(rich).to have_no_css("strong")
+      expect(rich).to have_no_css("img.emoji")
+
+      composer.toggle_rich_editor
+
+      expect(composer).to have_value("\\`\\*\\*not bold\\*\\*\n\n\\`:tada:")
+    end
   end
 
   context "with oneboxing" do
@@ -1149,6 +1175,22 @@ describe "Composer - ProseMirror editor", type: :system do
 
       expect(composer).to have_value("<mark>mark</mark> my <ins>words</ins> <kbd>ctrl</kbd> ")
     end
+
+    it "converts newlines to hard breaks when parsing `white-space: pre` HTML" do
+      cdp.allow_clipboard
+      open_composer
+
+      cdp.copy_paste("<span style='white-space: pre;'>line1\nline2\nline3</pre>", html: true)
+
+      expect(rich).to have_css("p", text: "line1")
+      expect(rich).to have_css("p", text: "line2")
+      expect(rich).to have_css("p", text: "line3")
+      expect(rich).to have_css("br", count: 2)
+
+      composer.toggle_rich_editor
+
+      expect(composer).to have_value("line1\nline2\nline3")
+    end
   end
 
   describe "toolbar state updates" do
@@ -1164,7 +1206,7 @@ describe "Composer - ProseMirror editor", type: :system do
       expect(page).to have_css(".toolbar__button.code.--active", count: 0)
       expect(page).to have_css(".toolbar__button.blockquote.--active", count: 0)
 
-      composer.type_content("> - ` [***many styles***](https://example.com)`")
+      composer.type_content("> - [***many `styles`***](https://example.com)")
       composer.send_keys(:left, :left)
 
       expect(page).to have_css(".toolbar__button.bold.--active", count: 1)
@@ -1746,6 +1788,22 @@ describe "Composer - ProseMirror editor", type: :system do
       expect(composer).to have_value(
         "[Updated **bold** and *italic* content](https://updated-example.com)",
       )
+    end
+
+    it "does not infinite loop on link rewrite" do
+      with_logs do |logger|
+        open_composer
+
+        composer.type_content("[Example](https://example.com)")
+        composer.type_content([PLATFORM_KEY_MODIFIER, "a"])
+        composer.type_content("Modified")
+
+        expect(logger.logs.map { |log| log[:message] }).not_to include(
+          "Maximum call stack size exceeded",
+        )
+
+        expect(rich).to have_content("Modified")
+      end
     end
   end
 
