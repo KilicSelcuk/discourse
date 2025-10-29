@@ -35,26 +35,14 @@ export default class AiBotConversationsHiddenSubmit extends Service {
       this.inputValue.length <
       this.siteSettings.min_personal_message_post_length
     ) {
-      // kuaza
-      /*
-      Ilk once yazi alanindaki karakter sayisini site ayarlarindaki ile karsilastirirz, ilf ile eger yazi alani yeterli karakterde degilse
-      o zaman sonraki asamaya geceriz.
-      - upload eidlen bir resim yada dosya varmi kontrol ederiz
-      - eger upload alaninda resim varsa hata mesaji cikartmayiz
-      - eger resimde yoksa demekki kullanici bos konu gondermeye calisiyor demektir ve uyari cikartiriz
-      */
-
-      // eger upload yoksa o zaman yazi alanina birseyler yazilmasi icin uyari veririz.
-      if (this.uploads && this.uploads.length < 1) {
-        return this.dialog.alert({
-          message: i18n(
-            "discourse_ai.ai_bot.conversations.min_input_length_message",
-            { count: this.siteSettings.min_post_length }
-          ),
-          didConfirm: () => this.focusInput(),
-          didCancel: () => this.focusInput(),
-        });
-      }
+      return this.dialog.alert({
+        message: i18n(
+          "discourse_ai.ai_bot.conversations.min_input_length_message",
+          { count: this.siteSettings.min_personal_message_post_length }
+        ),
+        didConfirm: () => this.focusInput(),
+        didCancel: () => this.focusInput(),
+      });
     }
 
     // Don't submit if there are still uploads in progress
@@ -65,9 +53,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
     }
 
     this.loading = true;
-    //const title = i18n("discourse_ai.ai_bot.default_pm_prefix");
-    const saatcik = Date.now();
-    const title = '[Geçici başlık] - ' + saatcik;
+    const title = i18n("discourse_ai.ai_bot.default_pm_prefix");
 
     // Prepare the raw content with any uploads appended
     let rawContent = this.inputValue;
@@ -82,22 +68,17 @@ export default class AiBotConversationsHiddenSubmit extends Service {
       });
     }
 
-    // kuaza
     try {
-      if(this.personaId == "28"){
-        const response = await ajax("/posts.json", {
-          method: "POST",
-          data: {
-            raw: rawContent,
-            title,
-            archetype: "private_message",
-            target_recipients: this.targetUsername, //"kompiter"
-            meta_data: { ai_persona_id: this.personaId /*9*/ },
-            //tags: [this.targetUsername]
-            //create_as_post_voting:true,
-            //wiki: true,
-          },
-        });
+      const response = await ajax("/posts.json", {
+        method: "POST",
+        data: {
+          raw: rawContent,
+          title,
+          archetype: "private_message",
+          target_recipients: this.targetUsername,
+          meta_data: { ai_persona_id: this.personaId },
+        },
+      });
 
       // Reset uploads after successful submission
       this.inputValue = "";
@@ -109,34 +90,6 @@ export default class AiBotConversationsHiddenSubmit extends Service {
       });
 
       this.router.transitionTo(response.post_url);
-
-      } else {
-        const response = await ajax("/posts.json", {
-          method: "POST",
-          data: {
-            raw: rawContent,
-            title,
-            archetype: "regular",
-            target_recipients: this.targetUsername, //"kompiter"
-            meta_data: { ai_persona_id: this.personaId /*9*/ },
-            tags: [this.targetUsername],
-            //create_as_post_voting:true,
-            wiki: true,
-          },
-        });
-
-      // Reset uploads after successful submission
-      this.inputValue = "";
-
-      this.appEvents.trigger("topic:created", {
-        id: response.topic_id,
-        slug: response.topic_slug,
-        title,
-      });
-
-      this.router.transitionTo(response.post_url);
-      }
-
     } finally {
       this.loading = false;
     }
