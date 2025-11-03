@@ -917,6 +917,9 @@ en:
           title: "Post"
           noun: "post"
       flagged_as: "Flagged as"
+      post_flagged_as: "Post flagged as"
+      queued_post_label: "Queued post"
+      user_label: "User"
       assigned_to: "Assigned to"
       moderator_actions: "Moderator actions"
       timeline_and_notes: "Timeline & notes"
@@ -2445,6 +2448,10 @@ en:
       no_results: "No results"
       search: "Search…"
       label: "Select options"
+    d_otp:
+      screen_reader:
+        one: Enter a number
+        other: Enter %{count} numbers
     form_kit:
       reset: Reset
       optional: optional
@@ -8027,8 +8034,8 @@ en:
 
         merging_user: "Merging user…"
         merge_failed: "There was an error while merging the users."
-        delete_forbidden_because_staff: "Admins can't be deleted."
-        delete_posts_forbidden_because_staff: "Can't delete all posts of admins and moderators."
+        delete_forbidden_because_admin: "Admins can't be deleted."
+        delete_posts_forbidden_because_admin: "Can't delete all posts of admins."
         delete_forbidden:
           one: "Users can't be deleted if they have posts. Delete all posts before trying to delete a user. (Posts older than %{count} day old can't be deleted.)"
           other: "Users can't be deleted if they have posts. Delete all posts before trying to delete a user. (Posts older than %{count} days old can't be deleted.)"
