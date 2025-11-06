@@ -45,6 +45,20 @@ export default async function lightbox(elem, siteSettings) {
       appendToEl: isTesting() && document.getElementById("ember-testing"),
     });
 
+    lightboxEl.on("afterInit", () => {
+      const el = lightboxEl.pswp.currSlide.data.element;
+      el.querySelector(".meta")?.classList.add("open");
+    });
+
+    lightboxEl.on("close", function () {
+      lightboxEl.pswp.element.classList.add("pswp--behind-header");
+    });
+
+    lightboxEl.on("destroy", () => {
+      const el = lightboxEl.pswp.currSlide.data.element;
+      el.querySelector(".meta")?.classList.remove("open");
+    });
+
     lightboxEl.on("uiRegister", function () {
       // adds a custom caption to lightbox
       lightboxEl.pswp.ui.registerElement({
@@ -121,6 +135,23 @@ export default async function lightbox(elem, siteSettings) {
           });
         },
       });
+
+      lightboxEl.pswp.ui.registerElement({
+        name: "image-info",
+        order: 9,
+        isButton: true,
+        tagName: "a",
+        title: i18n("lightbox.image_info"),
+        html: renderIcon("string", "circle-info", { class: "pswp__icn" }),
+        onInit: (el, pswp) => {
+          pswp.on("change", () => {
+            el.style.display = pswp.currSlide.data.details ? "block" : "none";
+          });
+        },
+        onClick: () => {
+          lightboxEl.pswp.element.classList.toggle("pswp--caption-expanded");
+        },
+      });
     });
 
     lightboxEl.addFilter("domItemData", (data, el) => {
@@ -145,8 +176,9 @@ export default async function lightbox(elem, siteSettings) {
           "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%271%27%20height%3D%271%27/%3E";
       }
 
+      const imgInfo = el.querySelector(".informations")?.textContent || "";
+
       if (!width || !height) {
-        const imgInfo = el.querySelector(".informations")?.textContent || "";
         const dimensions = imgInfo.trim().split(" ")[0];
         [width, height] = dimensions.split(/x|×/).map(Number);
       }
@@ -156,6 +188,7 @@ export default async function lightbox(elem, siteSettings) {
 
       data.src = data.src || el.getAttribute("data-large-src");
       data.title = el.title || el.alt;
+      data.details = imgInfo;
       data.w = data.width = width;
       data.h = data.height = height;
 
