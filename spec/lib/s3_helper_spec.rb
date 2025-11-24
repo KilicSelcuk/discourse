@@ -403,15 +403,29 @@ RSpec.describe "S3Helper" do
 
   describe ".s3_options" do
     context "when S3 profile is provided" do
-      it "includes profile in options and omits credentials" do
+      it "creates AssumeRoleCredentials when role_arn is present" do
         GlobalSetting.stubs(:s3_access_key_id).returns("test-key")
         GlobalSetting.stubs(:s3_secret_access_key).returns("test-secret")
+        GlobalSetting.stubs(:s3_role_arn).returns("arn:aws:iam::123456789012:role/test-role")
+        GlobalSetting.stubs(:s3_region).returns("us-west-2")
 
         options = S3Helper.s3_options(GlobalSetting, profile: "file-uploads")
 
-        expect(options[:profile]).to eq("file-uploads")
+        expect(options[:credentials]).to be_a(Aws::AssumeRoleCredentials)
         expect(options).not_to have_key(:access_key_id)
         expect(options).not_to have_key(:secret_access_key)
+      end
+
+      it "uses regular credentials when role_arn is not present" do
+        GlobalSetting.stubs(:s3_access_key_id).returns("test-key")
+        GlobalSetting.stubs(:s3_secret_access_key).returns("test-secret")
+        GlobalSetting.stubs(:s3_role_arn).returns(nil)
+
+        options = S3Helper.s3_options(GlobalSetting, profile: "file-uploads")
+
+        expect(options[:access_key_id]).to eq("test-key")
+        expect(options[:secret_access_key]).to eq("test-secret")
+        expect(options).not_to have_key(:credentials)
       end
     end
 
