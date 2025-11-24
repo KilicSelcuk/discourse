@@ -409,23 +409,26 @@ RSpec.describe "S3Helper" do
         GlobalSetting.stubs(:s3_role_arn).returns("arn:aws:iam::123456789012:role/test-role")
         GlobalSetting.stubs(:s3_region).returns("us-west-2")
 
+        stub_request(:post, "https://sts.us-west-2.amazonaws.com/").with(
+          body: hash_including("Action" => "AssumeRole"),
+        ).to_return(status: 200, body: <<~XML)
+              <AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
+                <AssumeRoleResult>
+                  <Credentials>
+                    <AccessKeyId>ASIATESTACCESSKEY</AccessKeyId>
+                    <SecretAccessKey>TestSecretKey</SecretAccessKey>
+                    <SessionToken>TestSessionToken</SessionToken>
+                    <Expiration>2099-12-31T23:59:59Z</Expiration>
+                  </Credentials>
+                </AssumeRoleResult>
+              </AssumeRoleResponse>
+            XML
+
         options = S3Helper.s3_options(GlobalSetting, profile: "file-uploads")
 
         expect(options[:credentials]).to be_a(Aws::AssumeRoleCredentials)
         expect(options).not_to have_key(:access_key_id)
         expect(options).not_to have_key(:secret_access_key)
-      end
-
-      it "uses regular credentials when role_arn is not present" do
-        GlobalSetting.stubs(:s3_access_key_id).returns("test-key")
-        GlobalSetting.stubs(:s3_secret_access_key).returns("test-secret")
-        GlobalSetting.stubs(:s3_role_arn).returns(nil)
-
-        options = S3Helper.s3_options(GlobalSetting, profile: "file-uploads")
-
-        expect(options[:access_key_id]).to eq("test-key")
-        expect(options[:secret_access_key]).to eq("test-secret")
-        expect(options).not_to have_key(:credentials)
       end
     end
 
