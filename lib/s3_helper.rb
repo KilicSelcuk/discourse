@@ -276,11 +276,28 @@ class S3Helper
     opts[:http_continue_timeout] = SiteSetting.s3_http_continue_timeout
     opts[:use_dualstack_endpoint] = SiteSetting.Upload.use_dualstack_endpoint
 
-    # Use profile if provided
+    # Use profile if provided - assume role using explicit credentials
     if profile.present?
-      opts[:profile] = profile
-      # Only add keys if they exist, otherwise let AWS SDK auto-discover
+      role_arn = obj.respond_to?(:s3_role_arn) ? obj.s3_role_arn : nil
+
+      if role_arn.present? && obj.s3_access_key_id.present? && obj.s3_secret_access_key.present?
+        # Explicitly assume the role using the provided credentials
+        # This prevents AWS SDK from using AWS_ACCESS_KEY_ID env vars directly
+        sts_client =
+          Aws::STS::Client.new(
+            region: obj.s3_region,
+            access_key_id: obj.s3_access_key_id,
+            secret_access_key: obj.s3_secret_access_key,
+          )
+
+        opts[:credentials] = Aws::AssumeRoleCredentials.new(
+          role_arn: role_arn,
+          role_session_name: profile,
+          client: sts_client,
+        )
+      end
     elsif obj.s3_access_key_id.present? && obj.s3_secret_access_key.present?
+      # Only add keys if they exist, otherwise let AWS SDK auto-discover
       opts[:access_key_id] = obj.s3_access_key_id
       opts[:secret_access_key] = obj.s3_secret_access_key
     end
