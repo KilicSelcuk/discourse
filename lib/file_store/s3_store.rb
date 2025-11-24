@@ -23,7 +23,8 @@ module FileStore
     def s3_helper
       @s3_helper ||=
         begin
-          setting_klass = SiteSetting
+          # Choose config source: SiteSetting (UI config) or GlobalSetting (env vars)
+          setting_klass = SiteSetting.enable_s3_uploads? ? SiteSetting : GlobalSetting
           profile = setting_klass.respond_to?(:s3_profile) ? setting_klass.s3_profile : nil
           options = S3Helper.s3_options(setting_klass, profile: profile)
           options[:use_accelerate_endpoint] = SiteSetting.Upload.enable_s3_transfer_acceleration
