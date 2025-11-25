@@ -2255,8 +2255,6 @@ files:
     hidden: true
     min: 60
     max: 604800
-  s3_profile:
-    default: ""
   allow_profile_backgrounds:
     client: true
     default: true
