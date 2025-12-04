@@ -5890,6 +5890,9 @@ en:
     post_raw: "Continuing the discussion from %{parent_url}.\n\nPrevious discussions:\n\n%{previous_topics}"
     small_action_post_raw: "Continue discussion at %{new_title}."
 
+  load_shedder:
+    server_busy: "Server is busy, please retry."
+
   fallback_username: "user"
 
   user_status:

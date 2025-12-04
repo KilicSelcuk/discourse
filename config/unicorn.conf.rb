@@ -116,6 +116,15 @@ before_fork do |server, worker|
       Demon::EmailSync.start(1, logger: server.logger)
     end
 
+    # Adaptive anon overload guard daemon (per-node)
+    load_shedder_enabled = ENV["DISCOURSE_LOAD_SHEDDER_ENABLED"] == "true"
+
+    if load_shedder_enabled
+      require "load_shedder/daemon"
+      LoadShedder::Daemon.start(1, logger: server.logger, workers: server.worker_processes)
+      server.logger.info "starting load_shedder_adaptive_limiter demon"
+    end
+
     DiscoursePluginRegistry.demon_processes.each do |demon_class|
       server.logger.info "starting #{demon_class.prefix} demon"
       demon_class.start(1, logger: server.logger)
