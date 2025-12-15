@@ -3389,6 +3389,8 @@ en:
       preview: "Post hidden due to flags by community members."
       subject_template: "Post hidden by community flags"
       text_body_template: |
+        %{email_preview}
+
         Hello,
 
         This is an automated message from %{site_name} to let you know that your post was hidden.
@@ -3454,6 +3456,8 @@ en:
       preview: "Post hidden again by community members."
       subject_template: "Post hidden by community flags, staff notified"
       text_body_template: |
+        %{email_preview}
+
         Hello,
 
         This is an automated message from %{site_name} to let you know that your post was hidden again.
@@ -3549,6 +3553,8 @@ en:
       preview: "Welcome to %{site_name}!"
       subject_template: "Welcome to %{site_name}!"
       text_body_template: |
+        %{email_preview}
+
         Thanks for joining %{site_name}, and welcome!
 
         %{new_user_tips}
@@ -3579,6 +3585,8 @@ en:
       preview: "Welcome to %{site_name}!"
       subject_template: "Welcome to %{site_name}!"
       text_body_template: |
+        %{email_preview}
+
         Thanks for accepting your invitation to %{site_name} -- welcome!
 
         - We've created this new account **%{username}** for you. Change your name or password by visiting [your user profile][prefs].
@@ -3988,6 +3996,8 @@ en:
       preview: "Posts temporarily hidden due to spam flags."
       subject_template: "New account on hold"
       text_body_template: |
+        %{email_preview}
+
         Hello,
 
         This is an automated message from %{site_name} to let you know that your posts have been temporarily hidden because they were flagged by the community.
@@ -4011,6 +4021,8 @@ en:
       preview: "Account temporarily placed on hold."
       subject_template: "Account temporarily on hold"
       text_body_template: |
+        %{email_preview}
+
         Hello,
 
         This is an automated message from %{site_name} to let you know that your account has been temporarily placed on hold as a precautionary measure.
@@ -4061,6 +4073,8 @@ en:
       preview: "Account no longer on hold."
       subject_template: "Account no longer on hold"
       text_body_template: |
+        %{email_preview}
+
         Hello,
 
         This is an automated message from %{site_name} to let you know that your account is no longer on hold after staff review.
@@ -4236,6 +4250,8 @@ en:
       preview: "Someone replied to your post."
       subject_template: "[%{email_prefix}] %{topic_title}"
       text_body_template: |
+        %{email_preview}
+
         %{header_instructions}
 
         %{message}
@@ -4248,6 +4264,8 @@ en:
       title: "User Replied PM"
       subject_template: "[%{email_prefix}] [PM] %{topic_title}"
       text_body_template: |
+        %{email_preview}
+
         %{header_instructions}
 
         %{message}
@@ -4261,6 +4279,8 @@ en:
       preview: "Someone quoted you in a post."
       subject_template: "[%{email_prefix}] %{topic_title}"
       text_body_template: |
+        %{email_preview}
+
         %{header_instructions}
 
         %{message}
@@ -4274,6 +4294,8 @@ en:
       preview: "Post linked in another topic."
       subject_template: "[%{email_prefix}] %{topic_title}"
       text_body_template: |
+        %{email_preview}
+
         %{header_instructions}
 
         %{message}
@@ -4287,6 +4309,8 @@ en:
       preview: "Someone mentioned you in a post."
       subject_template: "[%{email_prefix}] %{topic_title}"
       text_body_template: |
+        %{email_preview}
+
         %{header_instructions}
 
         %{message}
@@ -4348,6 +4372,8 @@ en:
       preview: "Someone replied to a topic you are Watching."
       subject_template: "[%{email_prefix}] %{topic_title}"
       text_body_template: |
+        %{email_preview}
+
         %{header_instructions}
 
         %{message}
@@ -4385,6 +4411,8 @@ en:
       preview: "Someone sent you a PM."
       subject_template: "[%{email_prefix}] [PM] %{topic_title}"
       text_body_template: |
+        %{email_preview}
+
         %{header_instructions}
 
         %{message}
@@ -4708,6 +4736,8 @@ en:
       preview: "Verify your device."
       subject_template: "[%{site_name}] New Login from %{location}"
       text_body_template: |
+        %{email_preview}
+
         Hello,
 
         We noticed a login from a device or location you don’t usually use. Was this you?
