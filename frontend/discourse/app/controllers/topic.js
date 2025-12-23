@@ -250,7 +250,7 @@ export default class TopicController extends Controller {
   @computed("buffered.category_id")
   get minimumRequiredTags() {
     return (
-      Category.findById(this.get("buffered.category_id")) // TODO we need a reactive buffered proxy
+      Category.findById(this.get("buffered.category_id")) // TODO (devxp) we need a buffered proxy that works with tracked properties
         ?.minimumRequiredTags || 0
     );
   }
