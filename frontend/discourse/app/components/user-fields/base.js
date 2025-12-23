@@ -1,5 +1,6 @@
 /* eslint-disable ember/no-classic-components */
 import Component from "@ember/component";
+import { computed } from "@ember/object";
 import { classNameBindings } from "@ember-decorators/component";
 import discourseComputed from "discourse/lib/decorators";
 
@@ -15,8 +16,8 @@ export default class UserFieldBase extends Component {
     this.field.element = element;
   }
 
-  @discourseComputed
-  noneLabel() {
+  @computed
+  get noneLabel() {
     return "user_fields.none";
   }
 

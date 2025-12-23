@@ -2,7 +2,7 @@
 import Component, { Textarea } from "@ember/component";
 import { array, fn } from "@ember/helper";
 import { on } from "@ember/modifier";
-import { action } from "@ember/object";
+import { action, computed } from "@ember/object";
 import { and, reads } from "@ember/object/computed";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
@@ -42,28 +42,28 @@ export default class TagInfo extends Component {
   @reads("currentUser.staff") canAdminTag;
   @and("canEditTags", "showEditControls") editSynonymsMode;
 
-  @discourseComputed("tagInfo.tag_group_names")
-  tagGroupsInfo(tagGroupNames) {
+  @computed("tagInfo.tag_group_names")
+  get tagGroupsInfo() {
     return i18n("tagging.tag_groups_info", {
-      count: tagGroupNames.length,
-      tag_groups: tagGroupNames.join(", "),
+      count: this.tagInfo?.tag_group_names?.length,
+      tag_groups: this.tagInfo?.tag_group_names?.join(", "),
     });
   }
 
-  @discourseComputed("tagInfo.categories")
-  categoriesInfo(categories) {
+  @computed("tagInfo.categories")
+  get categoriesInfo() {
     return i18n("tagging.category_restrictions", {
-      count: categories.length,
+      count: this.tagInfo?.categories?.length,
     });
   }
 
-  @discourseComputed(
+  @computed(
     "tagInfo.tag_group_names",
     "tagInfo.categories",
     "tagInfo.synonyms"
   )
-  nothingToShow(tagGroupNames, categories, synonyms) {
-    return isEmpty(tagGroupNames) && isEmpty(categories) && isEmpty(synonyms);
+  get nothingToShow() {
+    return isEmpty(this.tagInfo?.tag_group_names) && isEmpty(this.tagInfo?.categories) && isEmpty(this.tagInfo?.synonyms);
   }
 
   @discourseComputed("newTagName")

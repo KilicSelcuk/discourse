@@ -1,5 +1,6 @@
 /* eslint-disable ember/no-classic-components */
 import Component from "@ember/component";
+import { computed } from "@ember/object";
 import { sort } from "@ember/object/computed";
 import { classNameBindings } from "@ember-decorators/component";
 import CategoryTitleLink from "discourse/components/category-title-link";
@@ -20,19 +21,19 @@ export default class TagList extends Component {
 
   @sort("tags", "sortProperties") sortedTags;
 
-  @discourseComputed("titleKey")
-  title(titleKey) {
-    return titleKey && i18n(titleKey);
+  @computed("titleKey")
+  get title() {
+    return this.titleKey && i18n(this.titleKey);
   }
 
-  @discourseComputed("categoryId")
-  category(categoryId) {
-    return categoryId && Category.findById(categoryId);
+  @computed("categoryId")
+  get category() {
+    return this.categoryId && Category.findById(this.categoryId);
   }
 
-  @discourseComputed("category.fullSlug")
-  categoryClass(slug) {
-    return slug && `tag-list-${slug}`;
+  @computed("category.fullSlug")
+  get categoryClass() {
+    return this.category?.fullSlug && `tag-list-${this.category?.fullSlug}`;
   }
 
   @discourseComputed("tagGroupName")

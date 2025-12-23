@@ -1,6 +1,6 @@
 /* eslint-disable ember/no-classic-components */
 import Component from "@ember/component";
-import EmberObject from "@ember/object";
+import EmberObject, { computed } from "@ember/object";
 import { clearRender, render, settled } from "@ember/test-helpers";
 import { observes as nativeClassObserves } from "@ember-decorators/object";
 import { hbs } from "ember-cli-htmlbars";
@@ -43,6 +43,7 @@ const EmberObjectComponent = Component.extend({
   name: "",
   layout: hbs`<span class="ember-object-component">{{this.text}}</span>`,
 
+  // eslint-disable-next-line discourse/no-discourse-computed
   @discourseComputed("name")
   text(name) {
     return `hello, ${name}`;
@@ -53,9 +54,9 @@ class NativeComponent extends Component {
   name = "";
   layout = hbs`<span class="native-component">{{this.text}}</span>`;
 
-  @discourseComputed("name")
-  text(name) {
-    return `hello, ${name}`;
+  @computed("name")
+  get text() {
+    return `hello, ${this.name}`;
   }
 }
 

@@ -273,34 +273,36 @@ export default class User extends RestModel.extend(Evented) {
 
   statusManager = new UserStatusManager(this);
 
-  @discourseComputed("user_option.composition_mode")
-  useRichEditor(compositionMode) {
-    return compositionMode === USER_OPTION_COMPOSITION_MODES.rich;
+  @computed("user_option.composition_mode")
+  get useRichEditor() {
+    return (
+      this.user_option?.composition_mode === USER_OPTION_COMPOSITION_MODES.rich
+    );
   }
 
-  @discourseComputed("can_be_deleted", "post_count")
-  canBeDeleted(canBeDeleted, postCount) {
+  @computed("can_be_deleted", "post_count")
+  get canBeDeleted() {
     const maxPostCount = this.siteSettings.delete_all_posts_max;
-    return canBeDeleted && postCount <= maxPostCount;
+    return this.can_be_deleted && this.post_count <= maxPostCount;
   }
 
-  @discourseComputed()
-  stream() {
+  @computed()
+  get stream() {
     return UserStream.create({ user: this });
   }
 
-  @discourseComputed()
-  bookmarks() {
+  @computed()
+  get bookmarks() {
     return Bookmark.create({ user: this });
   }
 
-  @discourseComputed()
-  postsStream() {
+  @computed()
+  get postsStream() {
     return UserPostsStream.create({ user: this });
   }
 
-  @discourseComputed()
-  userDraftsStream() {
+  @computed()
+  get userDraftsStream() {
     return UserDraftsStream.create({ user: this });
   }
 
@@ -321,40 +323,47 @@ export default class User extends RestModel.extend(Evented) {
     return ajax(`/session/${this.username}`, { type: "DELETE" });
   }
 
-  @discourseComputed("username_lower")
-  searchContext(username) {
+  @computed("username_lower")
+  get searchContext() {
     return {
       type: "user",
-      id: username,
+      id: this.username_lower,
       /** @type User */
       user: this,
     };
   }
 
-  @discourseComputed("username", "name")
-  displayName(username, name) {
-    if (this.siteSettings.enable_names && !isEmpty(name)) {
-      return name;
+  @computed("username", "name")
+  get displayName() {
+    if (this.siteSettings.enable_names && !isEmpty(this.name)) {
+      return this.name;
     }
-    return username;
+    return this.username;
   }
 
-  @discourseComputed("profile_background_upload_url")
-  profileBackgroundUrl(bgUrl) {
-    if (isEmpty(bgUrl) || !this.siteSettings.allow_profile_backgrounds) {
+  @computed("profile_background_upload_url")
+  get profileBackgroundUrl() {
+    if (
+      isEmpty(this.profile_background_upload_url) ||
+      !this.siteSettings.allow_profile_backgrounds
+    ) {
       return htmlSafe("");
     }
-    return htmlSafe("background-image: url(" + getURLWithCDN(bgUrl) + ")");
+    return htmlSafe(
+      "background-image: url(" +
+        getURLWithCDN(this.profile_background_upload_url) +
+        ")"
+    );
   }
 
-  @discourseComputed()
-  path() {
+  @computed()
+  get path() {
     // no need to observe, requires a hard refresh to update
     return userPath(this.username_lower);
   }
 
-  @discourseComputed()
-  userApiKeys() {
+  @computed()
+  get userApiKeys() {
     const keys = this.user_api_keys;
     if (keys) {
       return keys.map((raw) => {
@@ -411,81 +420,81 @@ export default class User extends RestModel.extend(Evented) {
     }
   }
 
-  @discourseComputed()
-  mutedTopicsPath() {
+  @computed()
+  get mutedTopicsPath() {
     return defaultHomepage() === "latest"
       ? getURL("/?state=muted")
       : getURL("/latest?state=muted");
   }
 
-  @discourseComputed()
-  watchingTopicsPath() {
+  @computed()
+  get watchingTopicsPath() {
     return defaultHomepage() === "latest"
       ? getURL("/?state=watching")
       : getURL("/latest?state=watching");
   }
 
-  @discourseComputed()
-  trackingTopicsPath() {
+  @computed()
+  get trackingTopicsPath() {
     return defaultHomepage() === "latest"
       ? getURL("/?state=tracking")
       : getURL("/latest?state=tracking");
   }
 
-  @discourseComputed("username")
-  username_lower(username) {
-    return username.toLowerCase();
+  @computed("username")
+  get username_lower() {
+    return this.username.toLowerCase();
   }
 
-  @discourseComputed("trust_level")
-  trustLevel(trustLevel) {
+  @computed("trust_level")
+  get trustLevel() {
     return Site.currentProp("trustLevels").find(
-      (l) => l.id === parseInt(trustLevel, 10)
+      (l) => l.id === parseInt(this.trust_level, 10)
     );
   }
 
-  @discourseComputed("previous_visit_at")
-  previousVisitAt(previous_visit_at) {
-    return new Date(previous_visit_at);
+  @computed("previous_visit_at")
+  get previousVisitAt() {
+    return new Date(this.previous_visit_at);
   }
 
-  @discourseComputed("suspended_till")
-  suspended(suspendedTill) {
-    return suspendedTill && moment(suspendedTill).isAfter();
+  @computed("suspended_till")
+  get suspended() {
+    return this.suspended_till && moment(this.suspended_till).isAfter();
   }
 
-  @discourseComputed("suspended_till")
-  suspendedForever(suspendedTill) {
-    return isForever(suspendedTill);
+  @computed("suspended_till")
+  get suspendedForever() {
+    return isForever(this.suspended_till);
   }
 
-  @discourseComputed("silenced_till")
-  silenced(silencedTill) {
-    return silencedTill && moment(silencedTill).isAfter();
+  @computed("silenced_till")
+  get silenced() {
+    return this.silenced_till && moment(this.silenced_till).isAfter();
   }
 
-  @discourseComputed("silenced_till")
-  silencedForever(silencedTill) {
-    return isForever(silencedTill);
+  @computed("silenced_till")
+  get silencedForever() {
+    return isForever(this.silenced_till);
   }
 
-  @discourseComputed("suspended_till")
-  suspendedTillDate(suspendedTill) {
-    return longDate(suspendedTill);
+  @computed("suspended_till")
+  get suspendedTillDate() {
+    return longDate(this.suspended_till);
   }
 
-  @discourseComputed("silenced_till")
-  silencedTillDate(silencedTill) {
-    return longDate(silencedTill);
+  @computed("silenced_till")
+  get silencedTillDate() {
+    return longDate(this.silenced_till);
   }
 
-  @discourseComputed("sidebar_tags.[]")
-  sidebarTags(sidebarTags) {
-    if (!sidebarTags || sidebarTags.length === 0) {
+  @computed("sidebar_tags.[]")
+  get sidebarTags() {
+    if (!this.sidebar_tags || this.sidebar_tags?.length === 0) {
       return [];
     }
 
-    return sidebarTags.sort((a, b) => {
+    return this.sidebar_tags?.sort((a, b) => {
       return a.name.localeCompare(b.name);
     });
   }
@@ -773,8 +782,8 @@ export default class User extends RestModel.extend(Evented) {
     );
   }
 
-  @discourseComputed("groups.[]")
-  filteredGroups() {
+  @computed("groups.[]")
+  get filteredGroups() {
     const groups = this.groups || [];
 
     return groups.filter((group) => {
@@ -782,15 +791,15 @@ export default class User extends RestModel.extend(Evented) {
     });
   }
 
-  @discourseComputed("filteredGroups", "numGroupsToDisplay")
-  displayGroups(filteredGroups, numGroupsToDisplay) {
-    const groups = filteredGroups.slice(0, numGroupsToDisplay);
+  @computed("filteredGroups", "numGroupsToDisplay")
+  get displayGroups() {
+    const groups = this.filteredGroups.slice(0, this.numGroupsToDisplay);
     return groups.length === 0 ? null : groups;
   }
 
   // The user's stat count, excluding PMs.
-  @discourseComputed("statsExcludingPms.@each.count")
-  statsCountNonPM() {
+  @computed("statsExcludingPms.@each.count")
+  get statsCountNonPM() {
     if (isEmpty(this.statsExcludingPms)) {
       return 0;
     }
@@ -804,8 +813,8 @@ export default class User extends RestModel.extend(Evented) {
   }
 
   // The user's stats, excluding PMs.
-  @discourseComputed("stats.@each.isPM")
-  statsExcludingPms() {
+  @computed("stats.@each.isPM")
+  get statsExcludingPms() {
     if (isEmpty(this.stats)) {
       return [];
     }
@@ -1037,9 +1046,11 @@ export default class User extends RestModel.extend(Evented) {
     );
   }
 
-  @discourseComputed("can_delete_account")
-  canDeleteAccount(canDeleteAccount) {
-    return !this.siteSettings.enable_discourse_connect && canDeleteAccount;
+  @computed("can_delete_account")
+  get canDeleteAccount() {
+    return (
+      !this.siteSettings.enable_discourse_connect && this.can_delete_account
+    );
   }
 
   @dependentKeyCompat
@@ -1160,8 +1171,8 @@ export default class User extends RestModel.extend(Evented) {
     return group.get("can_admin_group") || group.get("is_group_owner");
   }
 
-  @discourseComputed("groups.@each.title", "badges.[]")
-  availableTitles() {
+  @computed("groups.@each.title", "badges.[]")
+  get availableTitles() {
     const titles = [];
 
     (this.groups || []).forEach((group) => {
@@ -1186,8 +1197,8 @@ export default class User extends RestModel.extend(Evented) {
       });
   }
 
-  @discourseComputed("groups.[]")
-  availableFlairs() {
+  @computed("groups.[]")
+  get availableFlairs() {
     const flairs = [];
 
     if (this.groups) {
@@ -1207,15 +1218,15 @@ export default class User extends RestModel.extend(Evented) {
     return flairs;
   }
 
-  @discourseComputed("user_option.text_size_seq", "user_option.text_size")
-  currentTextSize(serverSeq, serverSize) {
+  @computed("user_option.text_size_seq", "user_option.text_size")
+  get currentTextSize() {
     if (cookie(TEXT_SIZE_COOKIE_NAME)) {
       const [cookieSize, cookieSeq] = cookie(TEXT_SIZE_COOKIE_NAME).split("|");
-      if (cookieSeq >= serverSeq) {
+      if (cookieSeq >= this.user_option?.text_size_seq) {
         return cookieSize;
       }
     }
-    return serverSize;
+    return this.user_option?.text_size;
   }
 
   updateTextSizeCookie(newSize) {
@@ -1230,12 +1241,12 @@ export default class User extends RestModel.extend(Evented) {
     }
   }
 
-  @discourseComputed("second_factor_enabled", "staff")
-  enforcedSecondFactor(secondFactorEnabled, staff) {
+  @computed("second_factor_enabled", "staff")
+  get enforcedSecondFactor() {
     const enforce = this.siteSettings.enforce_second_factor;
     return (
-      !secondFactorEnabled &&
-      (enforce === "all" || (enforce === "staff" && staff))
+      !this.second_factor_enabled &&
+      (enforce === "all" || (enforce === "staff" && this.staff))
     );
   }
 
