@@ -244,9 +244,12 @@ export default class TopicController extends Controller {
     return this.currentUser?.can_send_private_messages;
   }
 
-  @discourseComputed("buffered.category_id")
-  minimumRequiredTags(categoryId) {
-    return Category.findById(categoryId)?.minimumRequiredTags || 0;
+  @computed("buffered.category_id")
+  get minimumRequiredTags() {
+    return (
+      Category.findById(this.get("buffered.category_id")) // TODO we need a reactive buffered proxy
+        ?.minimumRequiredTags || 0
+    );
   }
 
   @discourseComputed(

@@ -24,9 +24,9 @@ export default class AdminSiteTextEdit extends Controller {
     });
   }
 
-  @discourseComputed("buffered.value", "siteText.value")
-  saveDisabled(value) {
-    return this.siteText.value === value;
+  @computed("buffered.value", "siteText.value")
+  get saveDisabled() {
+    return this.siteText.value === this.get("buffered.value"); // TODO we need a reactive buffered proxy
   }
 
   @discourseComputed("siteText.status")
