@@ -2,7 +2,6 @@ import EmberObject, { computed } from "@ember/object";
 import { isEmpty } from "@ember/utils";
 import { renderAvatar } from "discourse/helpers/user-avatar";
 import { ajax } from "discourse/lib/ajax";
-import discourseComputed from "discourse/lib/decorators";
 import { durationTiny, number } from "discourse/lib/formatter";
 import getURL from "discourse/lib/get-url";
 import { makeArray } from "discourse/lib/helpers";
@@ -384,26 +383,31 @@ export default class Report extends EmberObject {
     }
   }
 
-  @discourseComputed("prev_period", "currentTotal", "currentAverage")
-  trendTitle(prev, currentTotal, currentAverage) {
-    let current = this.average ? currentAverage : currentTotal;
+  @computed("prev_period", "currentTotal", "currentAverage")
+  get trendTitle() {
+    let prev = this.prev_period;
+    let current = this.average ? this.currentAverage : this.currentTotal;
     let percent = this.percentChangeString(prev, current);
 
+    let formattedPrev;
+    let formattedCurrent;
+
     if (this.average) {
-      prev = prev ? prev.toFixed(1) : "0";
+      formattedPrev = prev ? prev.toFixed(1) : "0";
+      formattedCurrent = current;
       if (this.percent) {
-        current += "%";
-        prev += "%";
+        formattedCurrent += "%";
+        formattedPrev += "%";
       }
     } else {
-      prev = number(prev);
-      current = number(current);
+      formattedPrev = number(prev);
+      formattedCurrent = number(current);
     }
 
     return i18n("admin.dashboard.reports.trend_title", {
       percent,
-      prev,
-      current,
+      prev: formattedPrev,
+      current: formattedCurrent,
     });
   }
 
@@ -457,8 +461,9 @@ export default class Report extends EmberObject {
     );
   }
 
-  @discourseComputed("data")
-  sortedData(data) {
+  @computed("data")
+  get sortedData() {
+    const data = this.data || [];
     return this.xAxisIsDate ? [...data].reverse() : [...data];
   }
 

@@ -24,7 +24,6 @@ import {
   USER_OPTION_COMPOSITION_MODES,
 } from "discourse/lib/constants";
 import cookie, { removeCookie } from "discourse/lib/cookie";
-import discourseComputed from "discourse/lib/decorators";
 import deprecated from "discourse/lib/deprecated";
 import { isTesting } from "discourse/lib/environment";
 import { longDate } from "discourse/lib/formatter";
@@ -1322,13 +1321,13 @@ export default class User extends RestModel.extend(Evented) {
     return getOwner(this).lookup("service:notifications").isInDoNotDisturb;
   }
 
-  @discourseComputed(
-    "tracked_tags.[]",
-    "watched_tags.[]",
-    "watching_first_post_tags.[]"
-  )
-  trackedTags(trackedTags, watchedTags, watchingFirstPostTags) {
-    return [...trackedTags, ...watchedTags, ...watchingFirstPostTags];
+  @computed("tracked_tags.[]", "watched_tags.[]", "watching_first_post_tags.[]")
+  get trackedTags() {
+    return [
+      ...(this.tracked_tags || []),
+      ...(this.watched_tags || []),
+      ...(this.watching_first_post_tags || []),
+    ];
   }
 
   get prefersLightColor() {

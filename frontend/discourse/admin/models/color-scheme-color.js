@@ -2,7 +2,6 @@ import { tracked } from "@glimmer/tracking";
 import EmberObject, { computed } from "@ember/object";
 import { observes, on } from "@ember-decorators/object";
 import { propertyNotEqual } from "discourse/lib/computed";
-import discourseComputed from "discourse/lib/decorators";
 import { i18n } from "discourse-i18n";
 
 export default class ColorSchemeColor extends EmberObject {
@@ -83,8 +82,9 @@ export default class ColorSchemeColor extends EmberObject {
 
     @property brightness
   **/
-  @discourseComputed("hex")
-  brightness(hex) {
+  @computed("hex")
+  get brightness() {
+    let hex = this.hex;
     if (hex.length === 6 || hex.length === 3) {
       if (hex.length === 3) {
         hex =

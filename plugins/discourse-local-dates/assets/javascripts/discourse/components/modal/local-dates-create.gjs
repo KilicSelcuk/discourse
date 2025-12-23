@@ -13,7 +13,7 @@ import DModal from "discourse/components/d-modal";
 import TextField from "discourse/components/text-field";
 import icon from "discourse/helpers/d-icon";
 import { propertyNotEqual } from "discourse/lib/computed";
-import discourseComputed, { debounce } from "discourse/lib/decorators";
+import { debounce } from "discourse/lib/decorators";
 import { INPUT_DELAY } from "discourse/lib/environment";
 import { applyLocalDates } from "discourse/lib/local-dates";
 import { cook } from "discourse/lib/text";
@@ -92,7 +92,10 @@ export default class LocalDatesCreate extends Component {
   @computed("computedConfig", "isRange")
   get isValid() {
     const fromConfig = this.computedConfig.from;
-    if (!this.computedConfig.from.dateTime || !this.computedConfig.from.dateTime.isValid()) {
+    if (
+      !this.computedConfig.from.dateTime ||
+      !this.computedConfig.from.dateTime.isValid()
+    ) {
       return false;
     }
 
@@ -111,9 +114,13 @@ export default class LocalDatesCreate extends Component {
     return true;
   }
 
-  @discourseComputed("date", "time", "isRange", "options.{format,timezone}")
-  fromConfig(date, time, isRange, options = {}) {
-    const timeInferred = time ? false : true;
+  @computed("date", "time", "isRange", "options.{format,timezone}")
+  get fromConfig() {
+    let time = this.time;
+    const date = this.date;
+    const isRange = this.isRange;
+    const options = this.options || {};
+    const timeInferred = !time;
 
     let dateTime;
     if (!timeInferred) {
@@ -140,9 +147,13 @@ export default class LocalDatesCreate extends Component {
     });
   }
 
-  @discourseComputed("toDate", "toTime", "isRange", "options.{timezone,format}")
-  toConfig(date, time, isRange, options = {}) {
-    const timeInferred = time ? false : true;
+  @computed("toDate", "toTime", "isRange", "options.{timezone,format}")
+  get toConfig() {
+    let date = this.toDate;
+    let time = this.toTime;
+    const isRange = this.isRange;
+    const options = this.options || {};
+    const timeInferred = !time;
 
     if (time && !date) {
       date = moment().format(this.dateFormat);
@@ -208,7 +219,10 @@ export default class LocalDatesCreate extends Component {
 
   @computed("currentUserTimezone")
   get formattedCurrentUserTimezone() {
-    return this.currentUserTimezone.replace("_", " ").replace("Etc/", "").replace("/", ", ");
+    return this.currentUserTimezone
+      .replace("_", " ")
+      .replace("Etc/", "")
+      .replace("/", ", ");
   }
 
   @computed("formats")
@@ -285,7 +299,11 @@ export default class LocalDatesCreate extends Component {
           this.computedConfig?.to
         );
       } else {
-        text = this._generateDateMarkup(this.computedConfig?.from, this.options, this.isRange);
+        text = this._generateDateMarkup(
+          this.computedConfig?.from,
+          this.options,
+          this.isRange
+        );
       }
     }
     return text;

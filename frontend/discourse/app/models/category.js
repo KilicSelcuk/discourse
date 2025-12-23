@@ -11,7 +11,6 @@ import {
   removeValueFromArray,
 } from "discourse/lib/array-tools";
 import { AUTO_GROUPS } from "discourse/lib/constants";
-import discourseComputed from "discourse/lib/decorators";
 import { getOwnerWithFallback } from "discourse/lib/get-owner";
 import getURL from "discourse/lib/get-url";
 import { MultiCache } from "discourse/lib/multi-cache";
@@ -599,10 +598,11 @@ export default class Category extends RestModel {
     return [...(this.parentCategory?.ancestors || []), this];
   }
 
-  @discourseComputed("parentCategory", "parentCategory.predecessors")
-  predecessors(parentCategory, parentPredecessors) {
+  @computed("parentCategory", "parentCategory.predecessors")
+  get predecessors() {
+    const parentCategory = this.parentCategory;
     if (parentCategory) {
-      return [parentCategory, ...parentPredecessors];
+      return [parentCategory, ...(parentCategory.predecessors || [])];
     } else {
       return [];
     }
@@ -730,11 +730,13 @@ export default class Category extends RestModel {
     return this.topic_count > (this.num_featured_topics || 2);
   }
 
-  @discourseComputed("topic_count", "subcategories.[]")
-  totalTopicCount(topicCount, subcategories) {
+  @computed("topic_count", "subcategories.[]")
+  get totalTopicCount() {
+    let topicCount = this.topic_count || 0;
+    const subcategories = this.subcategories;
     if (subcategories) {
       subcategories.forEach((subcategory) => {
-        topicCount += subcategory.topic_count;
+        topicCount += subcategory.topic_count || 0;
       });
     }
     return topicCount;

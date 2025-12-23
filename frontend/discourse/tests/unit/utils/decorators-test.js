@@ -5,6 +5,7 @@ import { clearRender, render, settled } from "@ember/test-helpers";
 import { observes as nativeClassObserves } from "@ember-decorators/object";
 import { hbs } from "ember-cli-htmlbars";
 import { module, test } from "qunit";
+// eslint-disable-next-line discourse/no-discourse-computed
 import discourseComputed, {
   afterRender,
   debounce,

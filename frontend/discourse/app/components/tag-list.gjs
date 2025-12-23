@@ -6,7 +6,6 @@ import { classNameBindings } from "@ember-decorators/component";
 import CategoryTitleLink from "discourse/components/category-title-link";
 import icon from "discourse/helpers/d-icon";
 import discourseTag from "discourse/helpers/discourse-tag";
-import discourseComputed from "discourse/lib/decorators";
 import Category from "discourse/models/category";
 import { i18n } from "discourse-i18n";
 
@@ -36,8 +35,9 @@ export default class TagList extends Component {
     return this.category?.fullSlug && `tag-list-${this.category?.fullSlug}`;
   }
 
-  @discourseComputed("tagGroupName")
-  tagGroupNameClass(groupName) {
+  @computed("tagGroupName")
+  get tagGroupNameClass() {
+    let groupName = this.tagGroupName;
     if (groupName) {
       groupName = groupName
         .replace(/\s+/g, "-")

@@ -2,7 +2,6 @@ import Controller from "@ember/controller";
 import { action, computed } from "@ember/object";
 import { alias } from "@ember/object/computed";
 import { popupAjaxError } from "discourse/lib/ajax-error";
-import discourseComputed from "discourse/lib/decorators";
 import DiscourseURL from "discourse/lib/url";
 
 const RECURRING = "recurring";
@@ -18,14 +17,14 @@ export default class AdminPluginsDiscourseSubscriptionsProductsShowPlansShowCont
     return this.model?.plan?.metadata?.group_name || "no-group";
   }
 
-  @discourseComputed("model.groups")
-  availableGroups(groups) {
+  @computed("model.groups")
+  get availableGroups() {
     return [
       {
         id: null,
         name: "no-group",
       },
-      ...groups,
+      ...(this.model?.groups || []),
     ];
   }
 

@@ -21,7 +21,6 @@ import withEventValue from "discourse/helpers/with-event-value";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { removeValueFromArray } from "discourse/lib/array-tools";
-import discourseComputed from "discourse/lib/decorators";
 import TagChooser from "discourse/select-kit/components/tag-chooser";
 import { i18n } from "discourse-i18n";
 
@@ -57,19 +56,21 @@ export default class TagInfo extends Component {
     });
   }
 
-  @computed(
-    "tagInfo.tag_group_names",
-    "tagInfo.categories",
-    "tagInfo.synonyms"
-  )
+  @computed("tagInfo.tag_group_names", "tagInfo.categories", "tagInfo.synonyms")
   get nothingToShow() {
-    return isEmpty(this.tagInfo?.tag_group_names) && isEmpty(this.tagInfo?.categories) && isEmpty(this.tagInfo?.synonyms);
+    return (
+      isEmpty(this.tagInfo?.tag_group_names) &&
+      isEmpty(this.tagInfo?.categories) &&
+      isEmpty(this.tagInfo?.synonyms)
+    );
   }
 
-  @discourseComputed("newTagName")
-  updateDisabled(newTagName) {
+  @computed("newTagName")
+  get updateDisabled() {
     const filterRegexp = new RegExp(this.site.tags_filter_regexp, "g");
-    newTagName = newTagName ? newTagName.replace(filterRegexp, "").trim() : "";
+    const newTagName = this.newTagName
+      ? this.newTagName.replace(filterRegexp, "").trim()
+      : "";
     return newTagName.length === 0;
   }
 

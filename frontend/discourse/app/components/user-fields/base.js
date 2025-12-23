@@ -2,7 +2,6 @@
 import Component from "@ember/component";
 import { computed } from "@ember/object";
 import { classNameBindings } from "@ember-decorators/component";
-import discourseComputed from "discourse/lib/decorators";
 
 @classNameBindings(":user-field", "field.field_type", "customFieldClass")
 export default class UserFieldBase extends Component {
@@ -21,8 +20,9 @@ export default class UserFieldBase extends Component {
     return "user_fields.none";
   }
 
-  @discourseComputed("field.name")
-  customFieldClass(fieldName) {
+  @computed("field.name")
+  get customFieldClass() {
+    let fieldName = this.field?.name;
     if (fieldName) {
       fieldName = fieldName
         .replace(/\s+/g, "-")
@@ -30,5 +30,6 @@ export default class UserFieldBase extends Component {
         .toLowerCase();
       return fieldName && `user-field-${fieldName}`;
     }
+    return undefined;
   }
 }
