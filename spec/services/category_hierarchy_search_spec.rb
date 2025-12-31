@@ -3,6 +3,7 @@
 RSpec.describe CategoryHierarchySearch do
   before_all { SiteSetting.max_category_nesting = 3 }
 
+  fab!(:user)
   fab!(:parent_1) { Fabricate(:category, name: "Parent 1") }
   fab!(:parent_2) { Fabricate(:category, name: "Parent 2") }
 
@@ -87,18 +88,18 @@ RSpec.describe CategoryHierarchySearch do
   end
 
   it "returns categories with their ancestors that match the terms param in hierarchy order" do
-    context = described_class.call(params: { term: "match" })
+    context = described_class.call(guardian: Guardian.new, params: { term: "match" })
 
     expect(context).to be_success
 
-    expect(context.results).to eq(
+    expect(context.categories.map(&:name)).to eq(
       [
-        parent_1,
-        parent_1_sub_category_1,
-        parent_1_sub_category_1_sub_sub_category_1,
-        parent_2,
-        parent_2_sub_category_2,
-        parent_2_sub_category_2_sub_sub_category_2,
+        parent_1.name,
+        parent_1_sub_category_1.name,
+        parent_1_sub_category_1_sub_sub_category_1.name,
+        parent_2.name,
+        parent_2_sub_category_2.name,
+        parent_2_sub_category_2_sub_sub_category_2.name,
       ],
     )
   end
@@ -106,6 +107,7 @@ RSpec.describe CategoryHierarchySearch do
   it "returns categories with their ancestors that have ids that are included in the only_ids param in hierarchy order" do
     context =
       described_class.call(
+        guardian: Guardian.new,
         params: {
           only_ids: [
             parent_1_sub_category_1_sub_sub_category_1.id,
@@ -116,14 +118,14 @@ RSpec.describe CategoryHierarchySearch do
 
     expect(context).to be_success
 
-    expect(context.results).to eq(
+    expect(context.categories.map(&:name)).to eq(
       [
-        parent_1,
-        parent_1_sub_category_1,
-        parent_1_sub_category_1_sub_sub_category_1,
-        parent_2,
-        parent_2_sub_category_2,
-        parent_2_sub_category_2_sub_sub_category_2,
+        parent_1.name,
+        parent_1_sub_category_1.name,
+        parent_1_sub_category_1_sub_sub_category_1.name,
+        parent_2.name,
+        parent_2_sub_category_2.name,
+        parent_2_sub_category_2_sub_sub_category_2.name,
       ],
     )
   end
@@ -131,6 +133,7 @@ RSpec.describe CategoryHierarchySearch do
   it "returns categories with their ancestors that have ids which is not included in the except_ids param in hierarchy order" do
     context =
       described_class.call(
+        guardian: Guardian.new,
         params: {
           except_ids: [
             parent_1_sub_category_2_sub_sub_category_1.id,
@@ -143,7 +146,7 @@ RSpec.describe CategoryHierarchySearch do
 
     expect(context).to be_success
 
-    expect(context.results.map(&:name)).to eq(
+    expect(context.categories.map(&:name)).to eq(
       [
         parent_1.name,
         parent_1_sub_category_1.name,
@@ -156,6 +159,33 @@ RSpec.describe CategoryHierarchySearch do
         parent_2_sub_category_2_sub_sub_category_1.name,
         parent_2_sub_category_2_sub_sub_category_2.name,
         "Uncategorized",
+      ],
+    )
+  end
+
+  it "excludes categories that the guardian cannot see" do
+    restricted_group = Fabricate(:group)
+    restricted_parent_category = Fabricate(:category, name: "Restricted Parent")
+    restricted_parent_category.set_permissions(restricted_group => :full)
+    restricted_parent_category.save!
+
+    context = described_class.call(guardian: Guardian.new, params: { term: "restricted" })
+
+    expect(context).to be_success
+    expect(context.categories).to be_empty
+  end
+
+  it "applies a limit and offset" do
+    context = described_class.call(guardian: Guardian.new, params: { limit: 2 })
+
+    expect(context.categories.map(&:name)).to eq([parent_1.name, parent_1_sub_category_1.name])
+
+    context = described_class.call(guardian: Guardian.new, params: { limit: 2, offset: 2 })
+
+    expect(context.categories.map(&:name)).to eq(
+      [
+        parent_1_sub_category_1_sub_sub_category_1.name,
+        parent_1_sub_category_1_sub_sub_category_2.name,
       ],
     )
   end
