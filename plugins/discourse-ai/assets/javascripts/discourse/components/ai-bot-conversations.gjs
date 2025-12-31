@@ -153,6 +153,11 @@ export default class AiBotConversations extends Component {
     }
   }
 
+  @action
+  setVisibility(value) {
+    this.aiBotConversationsHiddenSubmit.isPrivate = value;
+  }
+
   get loading() {
     return this.aiBotConversationsHiddenSubmit?.loading;
   }
@@ -377,6 +382,25 @@ export default class AiBotConversations extends Component {
         @personaName={{@controller.persona}}
         @llmName={{@controller.llm}}
       />
+      <div class="ai-visibility-toggle">
+        <button
+          type="button"
+          class="visibility-btn general
+            {{unless this.aiBotConversationsHiddenSubmit.isPrivate 'active'}}"
+          {{on "click" (fn this.setVisibility false)}}
+        >
+          🌍 Genel
+        </button>
+
+        <button
+          type="button"
+          class="visibility-btn private
+            {{if this.aiBotConversationsHiddenSubmit.isPrivate 'active'}}"
+          {{on "click" (fn this.setVisibility true)}}
+        >
+          🔒 Gizli
+        </button>
+      </div>
 
       <div class="ai-bot-conversations__content-wrapper">
         <div class="ai-bot-conversations__title">

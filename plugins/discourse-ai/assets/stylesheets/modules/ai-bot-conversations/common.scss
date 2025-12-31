@@ -540,3 +540,57 @@ body.has-ai-conversations-sidebar {
     display: block;
   }
 }
+
+.ai-visibility-toggle {
+  display: flex;
+  gap: 1rem;
+  margin: 1em 0;
+}
+
+.visibility-btn {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  font-size: 1.1em;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+  background: var(--secondary-low);
+  color: var(--primary);
+}
+
+/* 🟢 GENEL */
+.visibility-btn.general.active {
+  background: var(--success-low);
+  border-color: var(--success);
+  color: var(--success);
+  box-shadow: 0 6px 16px rgb(0, 0, 0, 0.15);
+}
+
+/* 🔴 GİZLİ */
+.visibility-btn.private.active {
+  background: var(--danger-low);
+  border-color: var(--danger);
+  color: var(--danger);
+  box-shadow: 0 6px 16px rgb(0, 0, 0, 0.15);
+}
+
+/* Hover efekti */
+.visibility-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Click efekti */
+.visibility-btn:active {
+  transform: scale(0.97);
+}
+
+/* Inactive state */
+.visibility-btn:not(.active) {
+  opacity: 0.7;
+}

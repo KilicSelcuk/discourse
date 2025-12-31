@@ -14,7 +14,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
   @service siteSettings;
 
   @tracked loading = false;
-
+  @tracked isPrivate = false;
   personaId;
   targetUsername;
 
@@ -77,6 +77,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
           archetype: "private_message",
           target_recipients: this.targetUsername,
           meta_data: { ai_persona_id: this.personaId },
+          tags: [this.isPrivate ? "selam" : "pass"],
         },
       });
 
