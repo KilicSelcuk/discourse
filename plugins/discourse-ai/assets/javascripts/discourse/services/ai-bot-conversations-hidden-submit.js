@@ -66,7 +66,9 @@ export default class AiBotConversationsHiddenSubmit extends Service {
     }
 
     this.loading = true;
-    const title = i18n("discourse_ai.ai_bot.default_pm_prefix");
+    //const title = i18n("discourse_ai.ai_bot.default_pm_prefix");
+    const saatcik = Date.now();
+    const title = "[Geçici başlık] - " + saatcik;
 
     // Prepare the raw content with any uploads appended
     let rawContent = this.inputValue;
@@ -82,16 +84,21 @@ export default class AiBotConversationsHiddenSubmit extends Service {
     }
 
     try {
+      const data = {
+        raw: rawContent,
+        title,
+        archetype: this.isPrivate ? "private_message" : "regular",
+        target_recipients: this.targetUsername,
+        meta_data: { ai_persona_id: this.personaId },
+      };
+
+      if (this.isPrivate === false) {
+        data.tags = [this.targetUsername].filter(Boolean);
+      }
+
       const response = await ajax("/posts.json", {
         method: "POST",
-        data: {
-          raw: rawContent,
-          title,
-          archetype: "private_message",
-          target_recipients: this.targetUsername,
-          meta_data: { ai_persona_id: this.personaId },
-          tags: [this.isPrivate ? "Gizli" : "Genel", this.targetUsername],
-        },
+        data,
       });
 
       // Reset uploads after successful submission

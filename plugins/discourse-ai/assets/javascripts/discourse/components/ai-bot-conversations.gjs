@@ -359,10 +359,10 @@ export default class AiBotConversations extends Component {
   @action
   selectVisibility(value) {
     this.aiBotConversationsHiddenSubmit.isPrivate = value;
-    console.log(
+    /*console.log(
       "AI soru gizli mi?",
       this.aiBotConversationsHiddenSubmit.isPrivate
-    );
+    );*/
   }
 
   _autoExpandTextarea() {
