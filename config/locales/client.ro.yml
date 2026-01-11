@@ -1301,7 +1301,8 @@ ro:
       private_message: "Mesaj"
       private_messages: "Mesaje"
       upcoming_changes:
-        title: "Modificare viitoare activată"
+        for_user:
+          enabled: "Activată?"
       user_notifications:
         filters:
           filter_by: "Filtrează după"
@@ -1520,6 +1521,7 @@ ro:
         tags: "Etichete"
         interface: "Interfață"
         apps: "Aplicații"
+        navigation_menu: "Meniu de navigare"
       change_password:
         success: "(e-mail trimis)"
         in_progress: "(se trimite e-mail)"
@@ -2585,16 +2587,6 @@ ro:
           unread: "Nimic rămas necitit... impresionant!"
           new_new: "Nimic nou în acest moment... revino în curând!"
           new: "Nimic nou în acest moment... revino în curând!"
-      bottom:
-        latest: "Nu mai există niciun subiect recent."
-        posted: "Nu mai există subiecte postate."
-        read: "Nu mai există subiecte citite."
-        new: "Nu mai există subiecte noi."
-        unread: "Nu mai există subiecte necitite."
-        category: "Nu mai există subiecte din categoria %{category}."
-        tag: "Nu mai există subiecte din categoria %{tag}."
-        top: "Nu mai există subiecte de top."
-        bookmarks: "Nu mai sunt semne de carte."
     topic_bulk_actions:
       dismiss:
         name: "Respinge"
@@ -4035,6 +4027,8 @@ ro:
               options:
                 above_topic_content: "Deasupra conținutului subiectului"
                 below_site_header: "Sub antetul site-ului"
+            header_new_members:
+              placeholder: "Bine ai venit, %{preferred_display_name}!"
             header_logged_in:
               placeholder: "Bine ai revenit, %{preferred_display_name}!"
             header_anonymous:

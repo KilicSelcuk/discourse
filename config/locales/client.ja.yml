@@ -1255,6 +1255,9 @@ ja:
       new_private_message: "新規メッセージ"
       private_message: "メッセージ"
       private_messages: "メッセージ"
+      upcoming_changes:
+        for_user:
+          enabled: "有効ですか？"
       user_notifications:
         filters:
           filter_by: "フィルタ基準:"
@@ -3102,19 +3105,6 @@ ja:
           unread: "未読はありません... お見事！"
           new_new: "今のところ新着はありません... また後で確認してください！"
           new: "今のところ新着はありません... また後で確認してください！"
-      bottom:
-        latest: "最新のトピックは以上です。"
-        posted: "投稿のあるトピックは以上です。"
-        read: "既読のトピックは以上です。"
-        new: "新規トピックは以上です。"
-        unread: "未読のトピックは以上です。"
-        unseen: "その他の未読のトピックはありません。"
-        category: "%{category} のトピックは以上です。"
-        tag: "%{tag} のトピックは以上です。"
-        top: "人気のトピックは以上です。"
-        hot: "ホットなトピックは以上です。"
-        bookmarks: "ブックマーク済みのトピックは以上です。"
-        filter: "トピックは以上です。"
     topic_bulk_actions:
       dismiss:
         name: "閉じる"
@@ -3232,9 +3222,6 @@ ja:
         other: "%{count} 件の返信、最初の投稿にジャンプ"
       created_at: "作成日: %{date}"
       bumped_at: "最新: %{date}"
-      browse_all_categories_latest: "<a href='%{basePath}/categories'>すべてのカテゴリを閲覧</a>するか<a href='%{basePath}/latest'>最新のトピックを表示</a>します。"
-      browse_all_categories_latest_or_top: "<a href='%{basePath}/categories'>すべてのカテゴリを閲覧</a>するか、<a href='%{basePath}/latest'>最新のトピックを表示</a>するか、トップを見ます。"
-      browse_all_tags_or_latest: "<a href='%{basePath}/tags'>すべてのタグを閲覧</a>するか<a href='%{basePath}/latest'>最新のトピックを表示</a>します。"
       browse_latest_topics: "最新のトピックを閲覧する"
       suggest_create_topic: <a href>新しい会話を開始しますか？</a>
       jump_reply: "投稿の下の場所にジャンプする"
@@ -5104,6 +5091,8 @@ ja:
               options:
                 above_topic_content: "トピックコンテンツの上"
                 below_site_header: "サイトヘッダーの下"
+            text_section:
+              locale_label: "言語"
             header_logged_in:
               placeholder: "%{preferred_display_name}、おかえりなさい！"
             header_anonymous:
@@ -7138,7 +7127,6 @@ ja:
           button: "すべての投稿を削除する"
           progress:
             title: "投稿の削除状況"
-            description: "投稿を削除中…"
           confirmation:
             title: "@%{username} のすべての投稿を削除"
             description: |

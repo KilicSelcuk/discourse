@@ -1683,6 +1683,9 @@ ar:
       new_private_message: "رسالة جديدة"
       private_message: "رسالة"
       private_messages: "الرسائل"
+      upcoming_changes:
+        for_user:
+          enabled: "مفعَّلة؟"
       user_notifications:
         filters:
           filter_by: "التصفية حسب"
@@ -3998,19 +4001,6 @@ ar:
           unread: "لا يوجد محتوى غير مقروء… إنجاز رائع!"
           new_new: "لا جديد في الوقت الحالي... تفقد الصفحة مجددًا قريبًا!"
           new: "لا جديد في الوقت الحالي... تفقد الصفحة مجددًا قريبًا!"
-      bottom:
-        latest: "لا يوجد المزيد من الموضوعات الحديثة."
-        posted: "لا يوجد المزيد من الموضوعات المنشورة."
-        read: "لا يوجد المزيد من الموضوعات المقروءة."
-        new: "لا يوجد المزيد من الموضوعات الجديدة."
-        unread: "لا يوجد المزيد من الموضوعات غير المقروءة."
-        unseen: "لا يوجد المزيد من الموضوعات غير المقروءة."
-        category: "لا يوجد المزيد من الموضوعات في الفئة %{category}."
-        tag: "لا يوجد المزيد من الوضوعات التي تحمل الوسم %{tag}."
-        top: "لا يوجد المزيد من الموضوعات الأكثر نشاطًا."
-        hot: "لا يوجد المزيد من الموضوعات الساخنة."
-        bookmarks: "لا يوجد المزيد من الموضوعات ذات الإشارات المرجعية."
-        filter: "لا توجد موضوعات أخرى."
     topic_bulk_actions:
       dismiss:
         name: "تجاهل"
@@ -4174,9 +4164,6 @@ ar:
         other: "%{count} رد، الانتقال إلى المنشور الأول"
       created_at: "تاريخ الإنشاء: %{date}"
       bumped_at: "تاريخ آخر نسخ احتياطي: %{date}"
-      browse_all_categories_latest: "<a href='%{basePath}/categories'>استعرض كل الفئات</a> أو <a href='%{basePath}/latest'>شاهد آخر الموضوعات</a>."
-      browse_all_categories_latest_or_top: "<a href='%{basePath}/categories'>استعرض كل الفئات</a> أو <a href='%{basePath}/latest'>شاهد آخر الموضوعات</a>، أو انظر أبرز:"
-      browse_all_tags_or_latest: "<a href='%{basePath}/tags'>استعرض كل الوسوم</a> أو <a href='%{basePath}/latest'>شاهد آخر الموضوعات</a>."
       browse_latest_topics: "تصفح أحدث الموضوعات"
       browse_new_replies: "تصفح الردود الجديدة"
       browse_new_topics: "تصفح المواضيع الجديدة"
@@ -6485,6 +6472,10 @@ ar:
               options:
                 above_topic_content: "فوق محتوى الموضوع"
                 below_site_header: "أسفل رأس الموقع"
+            text_section:
+              locale_label: "اللغة"
+            header_new_members:
+              placeholder: "مرحبًا بك، %{preferred_display_name}!"
             header_logged_in:
               placeholder: "مرحبًا بعودتك يا %{preferred_display_name}!"
             header_anonymous:
@@ -8674,7 +8665,6 @@ ar:
           button: "حذف كل المنشورات"
           progress:
             title: "تقدُّم حذف المنشورات"
-            description: "جارٍ حذف المنشورات…"
           confirmation:
             title: "حذف كل المنشورات من @%{username}"
             description: |

@@ -882,6 +882,9 @@ lv:
       new_private_message: "Jauns ziņa"
       private_message: "Ziņa"
       private_messages: "Ziņas"
+      upcoming_changes:
+        for_user:
+          enabled: "Ieslēgts?"
       user_notifications:
         filters:
           filter_by: "Filtrēt pēc"
@@ -1910,16 +1913,6 @@ lv:
         bookmarks: "Jūs vēl neesat pievienojuši grāmatzīmēm nevienu tēmu."
         category: "Sadaļā %{category} nav tēmu."
         top: "Nav svarīgu tēmu."
-      bottom:
-        latest: "Vairāk jaunāko tēmu nav. "
-        posted: "Vairāk publicēto tēmu nav. "
-        read: "Vairāk lasīto tēmu nav. "
-        new: "Vairāk jauno tēmu nav. "
-        unread: "Vairāk nelasīto tēmu nav. "
-        category: "Vairāk sadaļās %{category} tēmu nav. "
-        tag: "Vairāk sadaļās %{tag} tēmu nav. "
-        top: "Vairāk svarīgu tēmu nav. "
-        bookmarks: "Vairāk grāmatzīmēs ievietoto tēmu nav. "
     topic_bulk_actions:
       dismiss:
         name: "Nerādīt"

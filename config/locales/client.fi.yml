@@ -1339,6 +1339,9 @@ fi:
       new_private_message: "Uusi viesti"
       private_message: "Viesti"
       private_messages: "Viestit"
+      upcoming_changes:
+        for_user:
+          enabled: "Otettu käyttöön?"
       user_notifications:
         filters:
           filter_by: "Suodata"
@@ -3280,19 +3283,6 @@ fi:
           unread: "Mitään ei ole lukematta... vaikuttavaa!"
           new_new: "Ei mitään uutta tällä hetkellä... palaa takaisin pian!"
           new: "Ei mitään uutta tällä hetkellä... palaa takaisin pian!"
-      bottom:
-        latest: "Tuoreimpia ketjuja ei ole enempää."
-        posted: "Ketjuja, joihin olet kirjoittanut, ei ole enempää."
-        read: "Luettuja ketjuja ei ole enempää."
-        new: "Uusia ketjuja ei ole enempää."
-        unread: "Ketjuja ei ole enempää lukematta."
-        unseen: "Näkemättömiä ketjuja ei ole enempää."
-        category: "Alueen %{category} ketjuja ei ole enempää."
-        tag: "Tunnisteella %{tag} merkittyjä ketjuja ei ole enempää."
-        top: "Suosittuja ketjuja ei ole enempää."
-        hot: "Suosittuja ketjuja ei ole enempää."
-        bookmarks: "Kirjanmerkkeihin lisättyjä ketjuja ei ole enempää."
-        filter: "Ketjuja ei ole enempää."
     topic_bulk_actions:
       dismiss:
         name: "Selvä"
@@ -3420,9 +3410,6 @@ fi:
         other: "%{count} vastausta, siirry ensimmäiseen viestiin"
       created_at: "Luotu: %{date}"
       bumped_at: "Viimeisin: %{date}"
-      browse_all_categories_latest: "<a href='%{basePath}/categories'>Selaa kaikkia alueita</a> tai <a href='%{basePath}/latest'>katso viimeisimmät ketjut</a>."
-      browse_all_categories_latest_or_top: "<a href='%{basePath}/categories'>Selaa kaikkia alueita</a>, <a href='%{basePath}/latest'>katso viimeisimmät ketjut</a> tai katso suosituimmat:"
-      browse_all_tags_or_latest: "<a href='%{basePath}/tags'>Selaa kaikkia tunnisteita</a> tai <a href='%{basePath}/latest'>katso viimeisimmät ketjut</a>."
       browse_latest_topics: "Selaa uusimpia ketjuja"
       suggest_create_topic: Valmiina <a href>aloittamaan uuden keskustelun?</a>
       jump_reply: "Siirry viestin alkuperäiseen sijaintiin"
@@ -5370,6 +5357,8 @@ fi:
               options:
                 above_topic_content: "Ketjun sisällön yläpuolella"
                 below_site_header: "Sivuston yläpalkin alapuolella"
+            text_section:
+              locale_label: "Kieli"
             header_logged_in:
               placeholder: "Tervetuloa takaisin, %{preferred_display_name}!"
             header_anonymous:
@@ -7434,7 +7423,6 @@ fi:
           button: "Poista kaikki viestit"
           progress:
             title: "Viestien poistamisen eteneminen"
-            description: "Poistetaan viestejä…"
           confirmation:
             title: "Poista kaikki käyttäjän @%{username} viestit"
             description: |

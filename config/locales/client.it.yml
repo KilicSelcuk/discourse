@@ -1339,6 +1339,9 @@ it:
       new_private_message: "Nuovo Messaggio"
       private_message: "Messaggio"
       private_messages: "Messaggi"
+      upcoming_changes:
+        for_user:
+          enabled: "Abilitato?"
       user_notifications:
         filters:
           filter_by: "Filtra per"
@@ -3277,19 +3280,6 @@ it:
           unread: "Non è rimasto nulla da leggere... impressionante!"
           new_new: "Al momento non ci sono novità... torna presto a trovarci!"
           new: "Al momento non ci sono novità... torna presto a trovarci!"
-      bottom:
-        latest: "Non ci sono altri argomenti più recenti."
-        posted: "Non ci sono altri argomenti pubblicati."
-        read: "Non ci sono altri argomenti letti."
-        new: "Non ci sono altri argomenti nuovi."
-        unread: "Non ci sono altri argomenti non letti."
-        unseen: "Non ci sono altri argomenti non letti."
-        category: "Non ci sono altri argomenti nella categoria %{category}."
-        tag: "Non ci sono altri argomenti con l'etichetta %{tag}."
-        top: "Non ci sono altri argomenti popolari."
-        hot: "Non ci sono altri argomenti popolari."
-        bookmarks: "Non ci sono ulteriori argomenti nei segnalibri."
-        filter: "Non ci sono altri argomenti."
     topic_bulk_actions:
       dismiss:
         name: "Ignora"
@@ -3417,9 +3407,6 @@ it:
         other: "%{count} risposte, vai al primo messaggio"
       created_at: "Creazione: %{date}"
       bumped_at: "Più recente: %{date}"
-      browse_all_categories_latest: "<a href='%{basePath}/categories'>Sfoglia tutte le categorie</a> o <a href='%{basePath}/latest'>visualizza gli argomenti più recenti</a>."
-      browse_all_categories_latest_or_top: "<a href='%{basePath}/categories'>Sfoglia tutte le categorie</a>, <a href='%{basePath}/latest'>visualizza gli argomenti più recenti</a> oppure guarda dall'inizio:"
-      browse_all_tags_or_latest: "<a href='%{basePath}/tags'>Sfoglia tutte le etichette</a> o <a href='%{basePath}/latest'>visualizza gli argomenti più recenti</a>."
       browse_latest_topics: "Sfoglia gli ultimi argomenti"
       suggest_create_topic: Pronto per <a href>iniziare una nuova conversazione?</a>
       jump_reply: "Passa alla posizione originale del messaggio"
@@ -5367,6 +5354,8 @@ it:
               options:
                 above_topic_content: "Sopra il contenuto dell'argomento"
                 below_site_header: "Sotto l'intestazione del sito"
+            text_section:
+              locale_label: "Lingua"
             header_logged_in:
               placeholder: "Rieccoti, %{preferred_display_name}!"
             header_anonymous:
@@ -7416,7 +7405,6 @@ it:
           button: "Cancella tutti i messaggi"
           progress:
             title: "Avanzamento dell'eliminazione dei messaggi"
-            description: "Eliminazione dei messaggi…"
           confirmation:
             title: "Elimina tutti i messaggi di @%{username}"
             description: |

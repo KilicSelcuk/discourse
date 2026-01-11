@@ -1038,6 +1038,9 @@ bg:
       new_private_message: "Ново Съобщение"
       private_message: "Съобщение"
       private_messages: "Съобщения"
+      upcoming_changes:
+        for_user:
+          enabled: "Да е включен?"
       user_notifications:
         filters:
           filter_by: "Филтриране по"
@@ -1281,7 +1284,6 @@ bg:
         tags: "Етикети"
         interface: "Интерфейс"
         apps: "Апликации"
-        navigation_menu: "Меню за навигация"
       change_password:
         success: "(имейлът е изпратен)"
         in_progress: "(изпраща се имейл)"
@@ -2401,17 +2403,6 @@ bg:
         category: "Няма теми в категория %{category}."
         top: "Няма топ теми."
         filter: "Няма теми."
-      bottom:
-        latest: "Няма повече теми в Последни."
-        posted: "Няма повече публикувани теми."
-        read: "Няма повече прочетени теми."
-        new: "Няма повече нови теми."
-        unread: "Няма повече непрочетени теми."
-        category: "Няма повече теми в %{category}"
-        tag: "Няма повече теми в %{tag}"
-        top: "Няма повече топ теми."
-        bookmarks: "Няма теми в Отметки"
-        filter: "Няма повече теми."
     topic_bulk_actions:
       dismiss:
         name: "Отмени"

@@ -1521,7 +1521,8 @@ ru:
       private_message: "Сообщение"
       private_messages: "Сообщения"
       upcoming_changes:
-        title: "Предстоящие изменения включены"
+        for_user:
+          enabled: "Включено?"
       user_notifications:
         filters:
           filter_by: "Фильтр"
@@ -3666,19 +3667,6 @@ ru:
           unread: "Ничего не осталось непрочитанным... впечатляет!"
           new_new: "На данный момент ничего нового... заходите позже!"
           new: "На данный момент ничего нового... заходите позже!"
-      bottom:
-        latest: "Обновлённых тем больше нет."
-        posted: "Новых тем больше нет."
-        read: "Прочитанных тем больше нет."
-        new: "Новых тем больше нет."
-        unread: "Непрочитанных тем больше нет."
-        unseen: "Больше нет непросмотренных тем."
-        category: "В категории %{category} больше нет тем."
-        tag: "Нет больше тем, помеченных тегом %{tag}."
-        top: "Обсуждаемых тем больше нет."
-        hot: "Горячих тем больше нет."
-        bookmarks: "Тем, помеченных закладкам,. больше нет."
-        filter: "Тем больше нет."
     topic_bulk_actions:
       dismiss:
         name: "Закрыть"
@@ -3826,9 +3814,6 @@ ru:
         other: "%{count} ответа, перейти к первой публикации"
       created_at: "Создано: %{date}"
       bumped_at: "Последняя: %{date}"
-      browse_all_categories_latest: "<a href='%{basePath}/categories'>Просмотрите все категории</a> или <a href='%{basePath}/latest'>ознакомьтесь с последними темами</a>."
-      browse_all_categories_latest_or_top: "<a href='%{basePath}/categories'>Просмотрите все категории</a>, <a href='%{basePath}/latest'>ознакомьтесь с последними</a> или самыми популярными темами:"
-      browse_all_tags_or_latest: "<a href='%{basePath}/tags'>Просмотрите все теги</a> или <a href='%{basePath}/latest'>ознакомьтесь с последними темами</a>."
       browse_latest_topics: "Просмотреть последние темы"
       browse_new_replies: "Просмотреть новые ответы"
       browse_new_topics: "Просмотрите новые темы"
@@ -5945,8 +5930,10 @@ ru:
               options:
                 above_topic_content: "Над контентом темы"
                 below_site_header: "Под заголовком сайта"
+            text_section:
+              locale_label: "Язык"
             header_new_members:
-              placeholder: "Добро пожаловать в %{site_name}, %{preferred_display_name}!"
+              placeholder: "Добро пожаловать в %{preferred_display_name}!"
             header_logged_in:
               label: "Заголовок для авторизованных пользователей"
               placeholder: "С возвращением, %{preferred_display_name}!"
@@ -8076,7 +8063,6 @@ ru:
           button: "Удалить все сообщения"
           progress:
             title: "Удаление сообщений"
-            description: "Удаление публикаций…"
           confirmation:
             title: "Удалить все сообщения от пользователя @%{username}"
             description: |

@@ -6,6 +6,10 @@
 
 uk:
   js:
+    carousel:
+      go_to_slide: "Перейти до слайда %{index}"
+      previous: "Попередній слайд"
+      next: "Наступний слайд"
     number:
       format:
         separator: "."
@@ -1567,7 +1571,16 @@ uk:
       private_message: "Повідомлення"
       private_messages: "Повідомлення"
       upcoming_changes:
-        title: "Майбутні зміни ввімкнено"
+        title: "Майбутні зміни"
+        for_user:
+          upcoming_change: "Майбутні зміни"
+          enabled: "Включено?"
+          why: "Чому?"
+        why_reasons:
+          not_in_specific_groups: "Користувач не належить до певних груп, необхідних для цієї зміни"
+          in_specific_groups: "Користувач належить до певних груп, необхідних для цієї зміни."
+          enabled_for_everyone: "Ця зміна доступна для всіх учасників"
+          enabled_for_no_one: "Ця зміна вимкнена для всіх учасників"
       user_notifications:
         filters:
           filter_by: "Фільтрувати за"
@@ -1924,7 +1937,8 @@ uk:
         tags: "Теґи"
         interface: "Інтерфейс"
         apps: "Застосунки"
-        navigation_menu: "Навігаційне меню"
+        navigation_menu: "Меню навігації"
+        upcoming_changes: "Майбутні зміни"
       change_password:
         success: "(лист надіслано)"
         in_progress: "(надсилання листа)"
@@ -3248,6 +3262,10 @@ uk:
         move_outside_grid: "Переміщення за межі сітки"
       image: "зображення"
       grid_label: "Це відображатиметься у вигляді сітки"
+      grid_mode_grid: "Сітка"
+      grid_mode_carousel: "Карусель"
+      grid_mode_title: "Встановіть стиль галереї зображень на %{mode}"
+      remove_grid: "Видалити сітку"
       image_scale_button: "Масштабувати зображення до %{percent}%"
       delete_image_button: Видалити зображення
       toggle_image_grid: Перемкнути сітку зображень
@@ -3750,19 +3768,6 @@ uk:
           unread: "Не залишилося нічого непрочитаного... вражаюче!"
           new_new: "Наразі нічого нового... заходьте пізніше!"
           new: "Наразі нічого нового... заходьте пізніше!"
-      bottom:
-        latest: "Більше немає останніх тем."
-        posted: "Створених тем більше немає."
-        read: "Більше немає прочитаних тем."
-        new: "Більше немає нових тем."
-        unread: "Більше немає непрочитаних тем."
-        unseen: "Більше немає непрочитаних тем."
-        category: "Більше немає тем в розділі %{category}."
-        tag: "Немає більше %{tag} тем."
-        top: "Топових тем більше немає."
-        hot: "Гарячих тем більше немає."
-        bookmarks: "Більше немає обраних тем."
-        filter: "Більше немає тем."
     topic_bulk_actions:
       dismiss:
         name: "Відкласти"
@@ -3910,9 +3915,6 @@ uk:
         other: "%{count} відповідей, перейти до першого допису"
       created_at: "Створено: %{date}"
       bumped_at: "Останні:%{date}"
-      browse_all_categories_latest: "<a href='%{basePath}/categories'>Перегляньте всі категорії</a> або <a href='%{basePath}/latest'>перегляньте останні теми</a>."
-      browse_all_categories_latest_or_top: "<a href='%{basePath}/categories'>Перегляньте всі категорії</a>, <a href='%{basePath}/latest'>перегляньте останні теми</a> або перегляньте топ:"
-      browse_all_tags_or_latest: "<a href='%{basePath}/tags'>Переглянути всі теги</a> або <a href='%{basePath}/latest'>переглянути останні теми</a>."
       browse_latest_topics: "Переглянути найновіші теми"
       browse_new_replies: "Переглянути нові відповіді"
       browse_new_topics: "Переглянути нові теми"
@@ -6180,15 +6182,18 @@ uk:
                 below_site_header: "Нижче заголовка сайту"
             text_section:
               title: "Текст, який налаштовується"
-              variables: "Ви можете використовувати ці змінні у своєму тексті: <code>&percnt;{preferred_display_name}</code>, <code>&percnt;{site_name}</code>"
+              locale_label: "Мова"
             header_new_members:
               label: "Заголовок для нових учасників"
-              placeholder: "Ласкаво просимо на %{site_name}, %{preferred_display_name}!"
+              description: "Доступна змінна: <code>&percnt;{preferred_display_name}</code>"
+              placeholder: "Ласкаво просимо, %{preferred_display_name}!"
             header_logged_in:
               label: "Заголовок для зареєстрованих учасників"
+              description: "Доступна змінна: <code>&percnt;{preferred_display_name}</code>"
               placeholder: "З поверненням, %{preferred_display_name}!"
             header_anonymous:
               label: "Заголовок для анонімних відвідувачів"
+              description: "Доступна змінна: <code>&percnt;{site_name}</code>"
               placeholder: "Ласкаво просимо до сайту %{site_name}!"
             subheader_logged_in:
               label: "Підзаголовок для зареєстрованих учасників"
@@ -8329,6 +8334,11 @@ uk:
         approve_bulk_success: "Успіх! Всіх обраних користувачів було схвалено та сповіщено про це."
         time_read: "Час читання"
         post_edits_count: "Редагувати допис"
+        upcoming_changes:
+          title: "Майбутні зміни для користувачів"
+          description: "Щоб змінити групи або увімкнути чи вимкнути майбутні зміни, відвідайте <a href='%{basePath}/admin/config/upcoming-changes'>сторінку конфігурації майбутніх змін</a>."
+          filter_placeholder: "Фільтрувати майбутні зміни за назвою або описом"
+          filter_no_results: "Майбутніх змін не знайдено"
         exports:
           title: Експорт користувачів
           download:
@@ -8355,7 +8365,6 @@ uk:
           button: "Видалити всі дописи"
           progress:
             title: "Хід видалення дописів"
-            description: "Видалення дописів…"
           confirmation:
             title: "Видалити всі дописи від @%{username}"
             description: |
@@ -8701,13 +8710,20 @@ uk:
             prompt: "Зміна цього параметра може мати далекосяжні або непередбачувані наслідки для вашого сайту. Ви впевнені, що хочете продовжити?"
             confirm: "Так, я впевнений"
           min_password_length:
+            prompt: "Ви збираєтеся змінити свою політику паролів. Це вплине на всіх користувачів, які змінюють свої паролі відтепер. Ви впевнені, що хочете продовжити?"
             confirm: "Так, оновити політику паролів"
           min_admin_password_length:
+            prompt: "Ви збираєтеся змінити свою політику паролів. Це вплине на всіх адміністраторів, які змінюватимуть свої паролі відтепер. Ви впевнені, що хочете продовжити?"
             confirm: "Так, оновити політику паролів"
           password_unique_charactes:
+            prompt: "Ви збираєтеся змінити свою політику паролів. Це вплине на всіх користувачів, які змінюватимуть свої паролі відтепер. Ви впевнені, що хочете продовжити?"
             confirm: "Так, оновити політику паролів"
           block_common_passwords:
+            prompt: "Ви збираєтеся змінити свою політику паролів. Це вплине на всіх користувачів, які змінюватимуть свої паролі відтепер. Ви впевнені, що хочете продовжити?"
             confirm: "Так, оновити політику паролів"
+          clean_up_inactive_users_after_days:
+            prompt: "Якщо ви встановите значення, відмінне від 0, користувачі, які не були активними протягом цієї кількості днів, будуть видалені назавжди. Ви впевнені, що хочете продовжити?"
+            confirm: "Так, я розумію, що неактивні користувачі будуть остаточно видалені, якщо я не встановлю це значення в 0"
         job_status:
           completed: "Оновлення завершено"
           enqueued: "Оновлення в процесі"

@@ -628,6 +628,9 @@ sw:
       new_private_message: "Ujumbe Mpya"
       private_message: "Ujumbe"
       private_messages: "Ujumbe"
+      upcoming_changes:
+        for_user:
+          enabled: "Imeruhusiwa?"
       user_notifications:
         filters:
           all: "Zote"
@@ -1505,16 +1508,6 @@ sw:
         bookmarks: "Hauja alamisha mada yoyote."
         category: "Hakuna %{category} mada."
         top: "Hakuna mada za juu."
-      bottom:
-        latest: "Hakuna mada mpya zingine."
-        posted: "Hakuna mada mpya zilizochapishwa."
-        read: "Hakuna mada zingine zilizosomwa."
-        new: "Hakuna mada mpya zingine."
-        unread: "Hakuna mada zingine ambazo hazijasomwa."
-        category: "Hakuna %{category} mada zingine."
-        tag: "Hakuna %{tag} mada zingine."
-        top: "Hakuna mada za juu zingine."
-        bookmarks: "Hakuna mada zingine zilizoalamishwa."
     topic_bulk_actions:
       dismiss:
         name: "Ondosha..."

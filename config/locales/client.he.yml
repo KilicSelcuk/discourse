@@ -1558,7 +1558,9 @@ he:
       private_message: "הודעה"
       private_messages: "הודעות"
       upcoming_changes:
-        title: "שינוי קרוב פעיל"
+        title: "שינויים צפויים"
+        for_user:
+          enabled: "מאופשר?"
       user_notifications:
         filters:
           filter_by: "סינון לפי"
@@ -1916,6 +1918,7 @@ he:
         interface: "מנשק"
         apps: "יישומים"
         navigation_menu: "תפריט ניווט"
+        upcoming_changes: "שינויים צפויים"
       change_password:
         success: "(דוא״ל נשלח)"
         in_progress: "(דוא״ל בשליחה)"
@@ -3736,19 +3739,6 @@ he:
           unread: "לא נשארו פריטים שלא נקראו… מרשים!"
           new_new: "אין חדש כרגע… נא לבדוק שוב בקרוב!"
           new: "אין חדש כרגע… נא לבדוק שוב בקרוב!"
-      bottom:
-        latest: "אין עוד נושאים אחרונים."
-        posted: "אין עוד נושאים שפורסמו."
-        read: "אין עוד נושאים שנקראו."
-        new: "אין עוד נושאים חדשים."
-        unread: "אין עוד נושאים שלא נקראו."
-        unseen: "אין יותר נושאים שלא נראו."
-        category: "אין עוד נושאים בקטגוריה %{category}."
-        tag: "אין יותר נושאי %{tag}."
-        top: "אין עוד נושאים מובילים."
-        hot: "אין נושאים חמים נוספים."
-        bookmarks: "אין עוד סימניות לנושאים."
-        filter: "אין נושאים נוספים."
     topic_bulk_actions:
       dismiss:
         name: "התעלמות"
@@ -3892,9 +3882,6 @@ he:
         other: "%{count} תגובות, קפיצה לפוסט הראשון"
       created_at: "מועד יצירה: %{date}"
       bumped_at: "האחרון: %{date}"
-      browse_all_categories_latest: "<a href='%{basePath}/categories'>עיון בכל הקטגוריות</a> או <a href='%{basePath}/latest'>הצגת הנושאים העדכניים ביותר</a>."
-      browse_all_categories_latest_or_top: "<a href='%{basePath}/categories'>עיון בכל הקטגוריות</a>, <a href='%{basePath}/latest'>הצגת הנושאים העדכניים ביותר</a> או צפייה במובילים:"
-      browse_all_tags_or_latest: "<a href='%{basePath}/tags'>עיון בכל התגיות</a> או <a href='%{basePath}/latest'>הצגת הנושאים העדכניים ביותר</a>."
       browse_latest_topics: "עיון בנושאים האחרונים"
       browse_new_replies: "עיון בתגובות חדשות"
       browse_new_topics: "עיון בנושאים חדשים"
@@ -6150,10 +6137,10 @@ he:
                 below_site_header: "מתחת לכותרת האתר"
             text_section:
               title: "טקסט לבחירה"
-              variables: "אפשר להשתמש במשתנים האלה בטקסט שלך: <code>&percnt;{preferred_display_name}</code>, <code>&percnt;{site_name}</code>"
+              locale_label: "שפה"
             header_new_members:
               label: "כותרת עליונה לחברים חדשים"
-              placeholder: "ברוך בואך אל %{site_name}, %{preferred_display_name}!"
+              placeholder: "ברוך בואך, %{preferred_display_name}!"
             header_logged_in:
               label: "כותרת עליונה לחברים שנכנסו למערכת"
               placeholder: "ברוך שובך, %{preferred_display_name}!"
@@ -8313,7 +8300,6 @@ he:
           button: "מחיקת כל הפוסטים"
           progress:
             title: "התקדמות מחיקת הפוסטים"
-            description: "פוסטים נמחקים…"
           confirmation:
             title: "למחוק את כל הפוסטים מאת ‎@%{username}"
             description: |

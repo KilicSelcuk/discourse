@@ -1148,6 +1148,9 @@ hy:
       new_private_message: "Նոր Հաղորդագրություն"
       private_message: "Հաղորդագրություն"
       private_messages: "Հաղորդագրություններ"
+      upcoming_changes:
+        for_user:
+          enabled: "Միացվա՞ծ է:"
       user_notifications:
         filters:
           filter_by: "Զտել Ըստ"
@@ -1448,7 +1451,6 @@ hy:
         tags: "Պիտակներ"
         interface: "Ինտերֆեյս"
         apps: "Հավելվածներ"
-        navigation_menu: "Նավիգացիոն Մենյու"
       change_password:
         success: "(էլ. նամակն ուղարկված է)"
         in_progress: "(էլ. նամակն ուղարկվում է)"
@@ -2587,19 +2589,6 @@ hy:
         category: " %{category}-ում թեմաներ չկան:"
         top: "Թոփ թեմաներ չկան:"
         hot: "Թոփ թեմաներ չկան:"
-      bottom:
-        latest: "Վերջին թեմաներ այլևս չկան:"
-        posted: "Հրապարակված թեմաներ այլևս չկան:"
-        read: "Կարդացած թեմաներ այլևս չկան:"
-        new: "Նոր թեմաներ այլևս չկան:"
-        unread: "Չկարդացած թեմաներ այլևս չկան:"
-        unseen: "Այլևս չտեսնված թեմաներ չկան։"
-        category: "%{category}-ում թեմաներ այլևս չկան:"
-        tag: "%{tag}-ում թեմաներ այլևս չկան:"
-        top: "Թոփ թեմաներ այլևս չկան:"
-        hot: "Թոփ թեմաներ այլևս չկան:"
-        bookmarks: "Էջանշված թեմաներ այլևս չկան:"
-        filter: "Այլևս թեմաներ չկան։"
     topic_bulk_actions:
       dismiss:
         name: "Չեղարկել"
@@ -2667,9 +2656,6 @@ hy:
       unread_indicator: "Ոչ մի անդամ դեռ չի կարդացել այս թեմայի մինչև վերջին գրառումը: "
       created_at: "Ստեղծվել է՝ %{date}"
       bumped_at: "Վերջինը՝ %{date}"
-      browse_all_categories_latest: "<a href='%{basePath}/categories'>Թերթեք բոլոր կատեգորիաները</a> կամ <a href='%{basePath}/latest'>դիտեք վերջին թեմաները</a>."
-      browse_all_categories_latest_or_top: "<a href='%{basePath}/categories'>Թերթեք բոլոր կատեգորիաները</a>, <a href='%{basePath}/latest'>դիտեք վերջին թեմաները</a> կամ ամենահայտնիները:"
-      browse_all_tags_or_latest: "<a href='%{basePath}/tags'>Թերթեք բոլոր պիտակները</a> կամ <a href='%{basePath}/latest'>դիտեք վերջին թեմաները</a>:"
       suggest_create_topic: Պատրա՞ստ եք <a href>նոր զրույց սկսել:</a>
       deleted: "Թեման ջնջվել է"
       slow_mode_update:

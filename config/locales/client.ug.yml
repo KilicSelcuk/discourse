@@ -1392,7 +1392,9 @@ ug:
       private_message: "ئۇچۇر"
       private_messages: "ئۇچۇر"
       upcoming_changes:
-        title: "كەلگۈسىدىكى ئۆزگىرىش قوزغىتىلدى"
+        title: "كەلگۈسى ئۆزگىرىش"
+        for_user:
+          enabled: "قوزغىتىلدى؟"
       user_notifications:
         filters:
           filter_by: "سۈزگۈچى"
@@ -1716,6 +1718,7 @@ ug:
         interface: "ئارايۈز"
         apps: "ئەپ"
         navigation_menu: "يولباشچى تىزىملىك"
+        upcoming_changes: "كەلگۈسى ئۆزگىرىش"
       change_password:
         success: "(ئېلخەت يوللاندى)"
         in_progress: "(ئېلخەت يوللاۋاتىدۇ…)"
@@ -3377,19 +3380,6 @@ ug:
           unread: "ئوقۇلمىغان ھېچ نەرسە قالمىدى… تەسىرلىك!"
           new_new: "ھازىرچە ھېچقانداق يېڭىلىق يوق… تېزلا تەكشۈرىدۇ!"
           new: "ھازىرچە ھېچقانداق يېڭىلىق يوق… تېزلا تەكشۈرىدۇ!"
-      bottom:
-        latest: "تېخىمۇ كۆپ يېڭى تېما يوق."
-        posted: "يوللانغان تېخىمۇ كۆپ تېما يوق."
-        read: "ئوقۇيدىغان تېخىمۇ كۆپ تېما يوق."
-        new: "تېخىمۇ كۆپ يېڭى تېما يوق."
-        unread: "تېخىمۇ كۆپ ئوقۇلمىغان تېما يوق."
-        unseen: "تېخىمۇ كۆپ كۆرمىگەن تېما يوق."
-        category: "تېخىمۇ كۆپ %{category} تېما يوق."
-        tag: "تېخىمۇ كۆپ %{tag} تېما يوق."
-        top: "تېخىمۇ كۆپ قىزغىن تېما يوق."
-        hot: "تېخىمۇ كۆپ قىزىق تېما يوق."
-        bookmarks: "تېخىمۇ كۆپ خەتكۈچلەنگەن تېما يوق."
-        filter: "تېخىمۇ كۆپ تېما يوق."
     topic_bulk_actions:
       dismiss:
         name: "پەرۋا قىلما"
@@ -3517,9 +3507,6 @@ ug:
         other: "%{count} جاۋاب، تۇنجى يازمىغا ئاتلايدۇ"
       created_at: "قۇرغان ۋاقتى: %{date}"
       bumped_at: "ئاخىرقى: %{date}"
-      browse_all_categories_latest: "<a href='%{basePath}/categories'>ھەممە سەھىپىگە كۆز يۈگۈرت</a> ياكى <a href='%{basePath}/latest'>ئاخىرقى تېمىنى كۆرسەت</a>."
-      browse_all_categories_latest_or_top: "<a href='%{basePath}/categories'>ھەممە سەھىپىگە كۆز يۈگۈرت</a> ، <a href='%{basePath}/latest'>ئاخىرقى تېمىنى كۆرسەت</a> ياكى قىزغىن تېمىنى كۆرسەت:"
-      browse_all_tags_or_latest: "<a href='%{basePath}/tags'>ھەممە بەلگىگە كۆز يۈگۈرت</a> ياكى <a href='%{basePath}/latest'>ئاخىرقى تېمىنى كۆرسەت</a>."
       browse_latest_topics: "ئاخىرقى تېمىغا كۆزيۈگۈرتىدۇ"
       browse_new_replies: "يېڭى جاۋابقا كۆز يۈگۈرت"
       browse_new_topics: "يېڭى تېمىغا كۆز يۈگۈرت"
@@ -5593,6 +5580,9 @@ ug:
                 below_site_header: "بېكەت بەت قېشىنىڭ ئاستىدا"
             text_section:
               title: "ئىختىيارى تېكىست"
+              locale_label: "تىل"
+            header_new_members:
+              placeholder: "%{preferred_display_name} غا خۇش كەلدىڭىز!"
             header_logged_in:
               placeholder: "قايتا خۇش كەلدىڭىز، %{preferred_display_name}!"
             header_anonymous:
@@ -7669,7 +7659,6 @@ ug:
           button: "ھەممە يازمىنى ئۆچۈر"
           progress:
             title: "يازما ئۆچۈرۈشنىڭ ئىلگىرىلىشى"
-            description: "يازما ئۆچۈرۈۋاتىدۇ…"
           confirmation:
             title: "@%{username} نىڭ ھەممە يازمىسىنى ئۆچۈر"
             description: |
