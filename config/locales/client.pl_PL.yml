@@ -757,6 +757,7 @@ pl_PL:
       show_more: "Pokaż więcej"
       show_less: "Pokaż mniej"
       back_to_queue: "Powrót do kolejki"
+      editing_post: "Edycja wpisu…"
       order_by: "Segreguj według:"
       date_filter: "Opublikowane między"
       in_reply_to: "w odpowiedzi na"
@@ -969,6 +970,10 @@ pl_PL:
         is_this_post: "Czy to jest %{reviewable_type} %{reviewable_human_score_types}?"
         delimiter: "lub"
         something_else_wrong: "Czy jest coś nie tak z tym %{reviewable_type}?"
+        approve_user: "Zatwierdzić tego użytkownika?"
+        suspect_user: "Czy to spam użytkownika?"
+        approve_post: "Zatwierdzić ten wpis?"
+        approve_topic: "Zatwierdzić ten temat?"
       types:
         reviewable_flagged_post:
           title: "Oflagowany wpis"
@@ -986,6 +991,15 @@ pl_PL:
         reviewable_post:
           title: "Wpis"
           noun: "wpis"
+        reviewable_ai_chat_message:
+          title: "Wiadomość czatu oflagowana AI"
+          noun: "wiadomość na czacie"
+        reviewable_ai_post:
+          title: "Wpis oflagowany AI"
+          noun: "wpis"
+        reviewable_post_voting_comment:
+          title: "Oflagowany komentarz"
+          noun: "komentarz"
       flagged_as: "Oflagowany jako"
       post_flagged_as: "Wpis oflagowano jako"
       chat_flagged_as: "Czat oflagowano jako"
@@ -1227,9 +1241,7 @@ pl_PL:
           self_lockout: "Zamierzasz zmienić widoczność grupy w sposób, który spowoduje utratę Twojego dostępu. Czy na pewno chcesz kontynuować?"
         email:
           title: "E-mail"
-          status: "Zsynchronizowane %{old_emails} / %{total_emails} wiadomości e-mail za pośrednictwem IMAP."
           enable_smtp: "Włącz SMTP"
-          enable_imap: "Włącz IMAP"
           test_settings: "Testuj ustawienia"
           save_settings: "Zapisz ustawienia"
           last_updated: "Ostatnio zaktualizowane:"
@@ -1238,14 +1250,8 @@ pl_PL:
           smtp_settings_valid: "Ustawienia SMTP są poprawne."
           smtp_title: "SMTP"
           smtp_instructions: "Gdy włączysz SMTP dla grupy, wszystkie wychodzące wiadomości e-mail wysyłane ze skrzynki odbiorczej grupy będą wysyłane przy użyciu określonych tutaj ustawień SMTP zamiast serwera pocztowego skonfigurowanego dla innych wiadomości e-mail wysyłanych przez Twoje forum."
-          imap_title: "IMAP"
-          imap_additional_settings: "Dodatkowe ustawienia"
-          imap_instructions: 'Po włączeniu protokołu IMAP dla grupy wiadomości e-mail są synchronizowane między skrzynką odbiorczą grupy a dostarczonym serwerem IMAP i skrzynką pocztową. Protokół SMTP musi być włączony przy użyciu prawidłowych i przetestowanych poświadczeń, zanim będzie można włączyć protokół IMAP. Nazwa użytkownika poczty e-mail i hasło używane do SMTP będą używane do IMAP. Aby uzyskać więcej informacji, zobacz ogłoszenie o funkcji <a target="_blank" href="https://meta.discourse.org/t/imap-support-for-group-inboxes/160588"></a>.'
-          imap_alpha_warning: "Ostrzeżenie: To jest funkcja na etapie alfa. Tylko Gmail jest oficjalnie wspierany. Używaj na własne ryzyko!"
-          imap_settings_valid: "Ustawienia IMAP są prawidłowe."
-          smtp_disable_confirm: "Jeśli wyłączysz SMTP, wszystkie ustawienia SMTP i IMAP zostaną zresetowane, a powiązane funkcje zostaną wyłączone. Jesteś pewien, że chcesz kontynuować?"
-          imap_disable_confirm: "Jeśli wyłączysz IMAP, wszystkie ustawienia IMAP zostaną zresetowane, a powiązane funkcje zostaną wyłączone. Jesteś pewien, że chcesz kontynuować?"
-          imap_mailbox_not_selected: "Musisz wybrać skrzynkę pocztową dla tej konfiguracji IMAP, w przeciwnym razie żadna skrzynka pocztowa nie zostanie zsynchronizowana!"
+          additional_settings: "Dodatkowe ustawienia"
+          smtp_disable_confirm: "Jeśli wyłączysz SMTP, wszystkie ustawienia SMTP zostaną zresetowane, a powiązane funkcje zostaną wyłączone. Czy na pewno chcesz kontynuować?"
           prefill:
             title: "Wstępne wypełnienie ustawieniami dla:"
             gmail: "Gmail"
@@ -1260,9 +1266,6 @@ pl_PL:
             smtp_server: "Serwer SMTP"
             smtp_port: "Port SMTP"
             smtp_ssl_mode: "Tryb SSL"
-            imap_server: "Serwer IMAP"
-            imap_port: "Port IMAP"
-            imap_ssl: "Użyj SSL dla IMAP"
             username: "Nazwa użytkownika"
             password: "Hasło"
           settings:
@@ -1271,10 +1274,6 @@ pl_PL:
             allow_unknown_sender_topic_replies_hint: "Umożliwia nieznanym nadawcom odpowiadanie na tematy grupy. Jeśli ta opcja nie jest włączona, odpowiedzi z adresów e-mail, które nie zostały jeszcze zaproszone do tematu, utworzą nowy temat."
             from_alias: "Z aliasu"
             from_alias_hint: "Alias używany jako adres nadawcy podczas wysyłania grupowych wiadomości e-mail SMTP. Pamiętaj, że może to nie być obsługiwane przez wszystkich dostawców poczty, zapoznaj się z dokumentacją dostawcy poczty."
-          mailboxes:
-            synchronized: "Zsynchronizowana skrzynka pocztowa"
-            none_found: "Na tym koncie e-mail nie znaleziono żadnych skrzynek pocztowych."
-            disabled: "Wyłączone"
         membership:
           title: Członkostwo
           access: Dostęp
@@ -2279,6 +2278,7 @@ pl_PL:
         redeemed_tab_with_count: "Zrealizowane (%{count})"
         invited_via: "Zaproszenie"
         invited_via_link: "link %{key} (użyto %{count} z %{max})"
+        generating_link: "Generowanie linku..."
         groups: "Grupy"
         topic: "Temat"
         sent: "Utworzone/Ostatnio wysłane"
@@ -3763,6 +3763,7 @@ pl_PL:
           unread: "Nic nie zostało do przeczytania. Imponujące!"
           new_new: "Na razie nic nowego. Sprawdź wkrótce!"
           new: "Na razie nic nowego. Sprawdź wkrótce!"
+          generic: "Nic tu nie ma...sprawdź wkrótce!"
     topic_bulk_actions:
       dismiss:
         name: "Odrzuć"
@@ -3942,7 +3943,7 @@ pl_PL:
           24_hours: "24 godziny"
           custom: "Niestandardowy czas trwania"
       slow_mode_notice:
-        duration: "Poczekaj %{duration} między postami w tym wątku"
+        duration: "Proszę odczekać %{duration} pomiędzy wpisami w tym temacie"
       topic_status_update:
         title: "Timer tematów"
         save: "Ustaw czas"
@@ -5148,6 +5149,7 @@ pl_PL:
         latest: "%{shortcut} Najnowsze"
         new: "%{shortcut} Nowe"
         unread: "%{shortcut} Nieprzeczytane"
+        unseen: "%{shortcut} Niewidziany"
         categories: "%{shortcut} Kategorie"
         top: "%{shortcut} Góra"
         bookmarks: "%{shortcut} Zakładki"
@@ -5640,6 +5642,9 @@ pl_PL:
           click_to_get_started: "Kliknij tutaj, aby rozpocząć."
           header_link_text: "Kategorie"
           header_action_title: "Edytuj kategorie paska bocznego"
+          header_action_new: "Nowa kategoria"
+          header_action_edit_sidebar: "Edytuj kategorie paska bocznego"
+          header_action_edit_header_dropdown: "Edytuj kategorie nawigacji"
           configure_defaults: "Skonfiguruj ustawienia domyślne"
         community:
           edit_section:

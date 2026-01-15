@@ -30,6 +30,7 @@ Discourse::Application.routes.draw do
     if Rails.env.local?
       get "/bootstrap/plugin-css-for-tests.css" => "bootstrap#plugin_css_for_tests"
       get "/bootstrap/core-css-for-tests.css" => "bootstrap#core_css_for_tests"
+      get "/bootstrap/site-settings-for-tests.js" => "bootstrap#site_settings_for_tests"
     end
 
     # This is not a valid production route and is causing routing errors to be raised in
@@ -1774,6 +1775,9 @@ Discourse::Application.routes.draw do
 
     get "/safe-mode" => "safe_mode#index"
     post "/safe-mode" => "safe_mode#enter", :as => "safe_mode_enter"
+
+    get "/dev-mode" => "dev_mode#index"
+    post "/dev-mode" => "dev_mode#enter", :as => "dev_mode_enter"
 
     get "/theme-qunit" => "qunit#theme"
     get "/theme-tests", to: redirect("/theme-qunit")

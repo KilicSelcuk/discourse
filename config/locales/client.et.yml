@@ -455,6 +455,8 @@ et:
         reviewable_post:
           title: "Postitus"
           noun: "postitus"
+        reviewable_ai_post:
+          noun: "postitus"
       user_label: "Kasutaja"
       notes:
         delete: "Kustuta"
@@ -582,8 +584,6 @@ et:
             password: "Parool"
           settings:
             title: "Seaded"
-          mailboxes:
-            disabled: "Välja lülitatud"
         membership:
           title: Liikmesus
           access: Juurdepääs

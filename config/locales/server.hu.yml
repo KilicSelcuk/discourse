@@ -1040,12 +1040,9 @@ hu:
     no_log_search_queries: "A keresési lekérdezések naplói jelenleg le vannak tiltva (az adminisztrátor engedélyezheti őket a webhely beállításaiban)."
   email_settings:
     pop3_authentication_error: "Probléma lépett fel a megadott POP3 hitelesítési adatokkal, ellenőrizze a felhasználónevet és a jelszót, majd próbálja újra."
-    imap_authentication_error: "Probléma lépett fel a megadott IMAP hitelesítési adatokkal, ellenőrizze a felhasználónevet és a jelszót, majd próbálja újra."
-    imap_no_response_error: "Hiba történt az IMAP-kiszolgálóval való kommunikáció során. %{message}"
     smtp_authentication_error: "Probléma lépett fel a megadott SMTP hitelesítési adatokkal, ellenőrizze a felhasználónevet és a jelszót, majd próbálja újra. %{message}"
     smtp_server_busy_error: "Az SMTP-szerver jelenleg foglalt, próbálkozzon újra később."
     smtp_unhandled_error: "Kezeletlen hiba történt az SMTP-szerverrel való kommunikáció során. %{message}"
-    imap_unhandled_error: "Kezeletlen hiba történt az IMAP-kiszolgálóval való kommunikáció során. %{message}"
     connection_error: "Hiba történt a szerverhez való kapcsolódás során, ellenőrizze a kiszolgáló nevét és portját, majd próbálja újra."
     timeout_error: "A kiszolgálóhoz való csatlakozás időtúllépése miatt ellenőrizze a kiszolgáló nevét és portját, majd próbálja újra."
     unhandled_error: "Kezeletlen hiba az e-mail beállítások tesztelésekor. %{message}"
@@ -1942,7 +1939,6 @@ hu:
     invite_link_max_redemptions_limit_users: "A normál felhasználók által generált meghívólinkek maximális beváltása nem haladhatja meg ezt az értéket."
     alert_admins_if_errors_per_minute: "A percenkénti hibák száma a rendszergazdai riasztás indításához. A 0 érték letiltja ezt a funkciót. MEGJEGYZÉS: újraindítás szükséges."
     alert_admins_if_errors_per_hour: "Az óránkénti hibák száma adminisztrátori riasztás indításához. A 0 érték letiltja ezt a funkciót. MEGJEGYZÉS: újraindítás szükséges."
-    categories_topics: "A /kategóriák oldalon megjelenítendő témák száma. Ha 0-ra van állítva, akkor automatikusan megpróbál egy olyan értéket találni, amely szimmetrikusan tartja a két oszlopot (kategóriák és témák)."
     suggested_topics: "A javasolt témák száma a téma alján láthatók."
     limit_suggested_to_category: "Csak a javasolt kategóriákból származó témakörök jelenhetnek meg a javasolt témakörökben."
     suggested_topics_max_days_old: "A javasolt olvasatlan témák nem lehetnek több, mint n naposak."
@@ -2164,14 +2160,7 @@ hu:
     email_in_allowed_groups: "Csoportok, amelyek új témákat tehetnek közzé e-mailben. Az adminisztrátorok és a moderátorok bármikor közzétehetnek új témákat e-mailben."
     email_in_authserv_id: "A bejövő e-mailek hitelesítését végző szolgáltatás azonosítója. Ennek beállításaira vonatkozó utasításokat <a href='https://meta.discourse.org/t/134358'>https://meta.discourse.org/t/134358</a> oldalon találja."
     email_in_spam_header: "Kiválasztja a levélszemét azonosítására használt e-mail-fejlécet. Ez a lehetőség az X-Spam-Flag, az X-Spam-Status vagy az X-SES-Spam-Verdict lehet, és a fejléc értéke alapján lesz az e-mail levélszemétnek jelölve. Például, ha a kiválasztott beállítás az X-Spam-Flag, akkor egy YES fejlécértékű üzenet levélszemétként lesz osztályozva."
-    enable_imap: "Az IMAP engedélyezése a csoportos üzenetek szinkronizálásához."
-    enable_imap_write: "Kétirányú IMAP szinkronizálás engedélyezése. Ha le van tiltva, az IMAP-fiókokon minden írási művelet le van tiltva."
-    enable_imap_idle: "Használja az IMAP IDLE mechanizmust az új e-mailek megvárásához."
     enable_smtp: "Engedélyezze az SMTP-t a csoportos üzenetekhez tartozó értesítések küldéséhez."
-    imap_polling_period_mins: "Az IMAP-fiókok e-mailek ellenőrzése közötti időszak percekben."
-    imap_polling_old_emails: "A régi (feldolgozott) e-mailek maximális száma, amelyet minden alkalommal frissíteni kell, amikor egy IMAP-fiók lekérdezésre kerül (0 az összeshez)."
-    imap_polling_new_emails: "Az új (feldolgozatlan) e-mailek maximális száma, amely minden alkalommal frissül, amikor egy IMAP-fiók lekérdezésre kerül ."
-    imap_batch_import_email: "Az új e-mailek minimális száma, amely kiváltja az importálási módot (letiltja az importált bejegyzésekre vonatkozó értesítéseket)."
     email_prefix: "Az e-mailek tárgyában használt [címke]. Alapértelmezés szerint a „cím” lesz, ha nincs beállítva."
     email_site_title: "A webhelyről érkező e-mailek feladójaként használt webhely címe. Ha nincs beállítva, az alapértelmezett a „cím”. Ha a \"cím\" olyan karaktereket tartalmaz, amelyek nem engedélyezettek az e-mail küldő karakterláncaiban, használja ezt a beállítást."
     find_related_post_with_key: "Csak a \"válaszkulcs\" használatával találja meg a válaszolt hozzászólást. FIGYELMEZTETÉS: ennek kikapcsolása lehetővé teszi a felhasználó megszemélyesítését az e-mail cím alapján."
@@ -4916,6 +4905,8 @@ hu:
     deprecation_error_label: Elavult Javascript hibaüzenetre késztetése
     enter: "Biztonságos módba lépés"
     must_select: "A biztonságos módba lépéshez választania kell legalább egy lehetőséget."
+  dev_mode:
+    enter: "Belépés"
   wizard:
     title: "Discourse telepítő"
     step:
@@ -5009,8 +5000,6 @@ hu:
     api_post_delete: "API-n keresztül törölve"
     reminder_deleted: "Új emlékeztetővel helyettesítve"
     user_associated_posts_deleted: "A felhasználó megsemmisült"
-    imap_email_deleted: "Az e-mail törölve lett az IMAP-kiszolgálóról."
-    imap_email_marked_as_spam: "Az e-mail átkerült a spam mappába az IMAP szerveren."
     auto_deleted_hidden_posts: "Automatikusan megsemmisített rejtett bejegyzések"
   reviewables:
     already_handled: "Köszönjük, de már átnéztük ezt a bejegyzést, és úgy döntöttünk, hogy nem kell újra megjelölni."
@@ -5080,19 +5069,15 @@ hu:
         description: "Egyetértek a jelöléssel, és elrejtem ezt a bejegyzést + automatikusan üzenetet küldök a felhasználónak, hogy szerkessze azt."
         complete: "A bejegyzés elrejtve, a felhasználó értesítést kapott."
       agree_and_edit:
-        title: "Elfogadás és bejegyzés szerkesztése"
+        title: "Bejegyzés szerkesztése"
         description: "Egyetértek a jelöléssel és szerkesztő megnyitása a bejegyzés szerkesztéséhez."
         complete: "Megjelölés tudomásul véve, most már szerkesztheti a bejegyzést."
       delete:
         title: "Törlés"
         complete: "Bejegyzés törölve."
       delete_and_ignore:
-        title: "Megjelölés figyelmen kívül hagyása, és a bejegyzés törlése"
-        description: "Megjelölés figyelmen kívül hagyása a sorból való eltávolítással, és a bejegyzés törlésével; ha ez az első hozzászólás, akkor a témát is törli. "
         complete: "Bejegyzés törölve."
       delete_and_ignore_replies:
-        title: "Megjelölés figyelmen kívül hagyása, a bejegyzés és a válaszok törlése"
-        description: "Megjelölés figyelmen kívül hagyása a sorból való eltávolítással, a bejegyzés és az összes válasz törlésével; ha ez az első hozzászólás, akkor a témát is törli"
         confirm: "Biztos vagy benne, hogy törölni szeretnéd a hozzászólásra adott válaszokat is?"
         complete: "A bejegyzés és a válaszok törölve."
       delete_and_agree:
@@ -5105,11 +5090,12 @@ hu:
         confirm: "Biztos vagy benne, hogy törölni szeretnéd a hozzászólásra adott válaszokat is?"
         complete: "A bejegyzés és a válaszok törölve."
       disagree_and_restore:
-        title: "Nem, bejegyzés visszaállítása"
-        description: "A bejegyzés visszaállítása, hogy minden felhasználó láthassa."
+        title: "Bejegyzés visszaállítása"
         complete: "A bejegyzés visszaállítva."
-      disagree:
+      disagree_bundle:
         title: "Nem"
+      disagree:
+        title: "Bejegyzés megtartása"
         complete: "Megjelölés figyelmen kívül hagyva."
       discard_post:
         title: "Bejegyzés elvetése"
@@ -5124,31 +5110,36 @@ hu:
         description: "Megjelölés figyelmen kívül hagyása annak a sorból való eltávolításával anélkül, hogy bármilyen intézkedést tenne. A rejtett bejegyzések rejtve maradnak, és az automatikus eszközök kezelik őket."
         complete: "Megjelölés figyelmen kívül hagyva."
       approve:
-        title: "Jóváhagyás"
+        title: "Igen"
         complete: "Bejegyzés jóváhagyva."
       approve_post:
-        title: "Bejegyzés jóváhagyása"
+        title: "Igen"
         complete: "Bejegyzés jóváhagyva."
       approve_post_closed:
-        title: "Bejegyzés jóváhagyása"
+        title: "Igen"
         confirm: "Ez a téma lezárva. Ennek ellenére szeretné létrehozni a bejegyzést?"
         complete: "Bejegyzés jóváhagyva."
+      reject_post_bundle:
+        title: "Nem"
       reject_post:
         title: "Bejegyzés elutasítása"
         complete: "Bejegyzés elutasítva."
       approve_user:
-        title: "Felhasználó jóváhagyása"
+        title: "Igen"
         complete: "Felhasználó jóváhagyva."
       reject_user:
-        title: "Felhasználó törlése"
+        title: "Nem"
         delete:
           title: "Felhasználó törlése"
-          description: "A felhasználó törlésre kerül a fórumról."
           complete: "Felhasználó törölve."
         block:
           title: "Felhasználó törlése és blokkolása"
           description: "A felhasználót töröljük, IP-címét és e-mail címét pedig blokkoljuk."
           complete: "Felhasználó törölve és letiltva."
+      confirm_spam:
+        title: "Igen"
+      not_spam:
+        title: "Nem"
       reject:
         title: "Elutasítás"
         bundle_title: "Elutasítás..."
@@ -5165,10 +5156,10 @@ hu:
         title: "A bejegyzés maradjon törölve"
         complete: "A bejegyzést elutasították és törölték."
       approve_and_restore:
-        title: "Bejegyzés jóváhagyása és visszaállítása"
+        title: "Igen"
         complete: "A bejegyzés jóváhagyva és visszaállítva."
       approve_and_unhide:
-        title: "Bejegyzés jóváhagyása és felfedése"
+        title: "Igen"
         complete: "Bejegyzés jóváhagyva és felfedve"
       post_actions:
         bundle_title: "Mit akarsz csinálni a bejegyzéssel?"
